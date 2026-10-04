@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ScrollTrigger } from './utils/gsapSetup';
+import { ScrollTrigger, refreshScrollTrigger } from './utils/gsapSetup';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { QuickDiagnosis } from './components/QuickDiagnosis';
@@ -55,7 +55,7 @@ export default function App() {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  // Hash Routing
+  // Hash Routing & ScrollTrigger synchronization
   useEffect(() => {
     const handleHashChange = () => {
       const h = window.location.hash || '#/';
@@ -67,9 +67,11 @@ export default function App() {
         const el = document.getElementById(anchorId);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
+          setTimeout(() => refreshScrollTrigger(100), 400);
         }
       } else {
         window.scrollTo({ top: 0, behavior: 'instant' });
+        setTimeout(() => refreshScrollTrigger(50), 80);
       }
 
       // Title sync
@@ -91,26 +93,44 @@ export default function App() {
       } else {
         document.title = titles[path] || 'Shahin Alam — Product Designer';
       }
-
-      // Refresh GSAP ScrollTrigger measurements on route changes
-      const rafId = requestAnimationFrame(() => {
-        setTimeout(() => {
-          ScrollTrigger.refresh();
-        }, 60);
-      });
     };
 
     window.addEventListener('hashchange', handleHashChange);
     handleHashChange();
 
-    // Ensure ScrollTrigger accurately calculates measurements after fonts and assets load
-    const timer1 = setTimeout(() => ScrollTrigger.refresh(), 200);
-    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 800);
+    // 1. Recalculate triggers after web fonts are fully rendered
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        refreshScrollTrigger(50);
+      });
+    }
+
+    // 2. Recalculate triggers after full window load (including large images like Shahin.png)
+    const handleWindowLoad = () => refreshScrollTrigger(100);
+    window.addEventListener('load', handleWindowLoad);
+
+    // 3. Staggered fallbacks for slow network / asset environments
+    const timer1 = setTimeout(() => refreshScrollTrigger(0), 150);
+    const timer2 = setTimeout(() => refreshScrollTrigger(0), 600);
+    const timer3 = setTimeout(() => refreshScrollTrigger(0), 1400);
+
+    // 4. ResizeObserver on document root to keep ScrollTrigger locked to real layout
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        refreshScrollTrigger(80);
+      });
+      const bodyEl = document.body;
+      if (bodyEl) resizeObserver.observe(bodyEl);
+    }
 
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('load', handleWindowLoad);
       clearTimeout(timer1);
       clearTimeout(timer2);
+      clearTimeout(timer3);
+      if (resizeObserver) resizeObserver.disconnect();
     };
   }, []);
 
@@ -124,7 +144,7 @@ export default function App() {
 
   return (
     <ProjectsProvider>
-      <div className="min-h-screen flex flex-col bg-[var(--paper)] text-[var(--ink)] antialiased transition-colors duration-200">
+      <div className="min-h-screen flex flex-col bg-[var(--paper)] text-[var(--ink)] antialiased transition-colors duration-200 overflow-x-hidden">
         {/* Real-time GSAP Scroll Progress Indicator */}
         <ScrollProgressBar />
 

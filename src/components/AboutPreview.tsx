@@ -12,41 +12,45 @@ export function AboutPreview() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.about-portrait-wrap',
-        { x: -30, opacity: 0.5 },
+        { x: -25, opacity: 0.3 },
         {
           x: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.75,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
-            trigger: containerRef.current || '#about',
+            trigger: '.about-portrait-wrap',
             start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
 
       gsap.fromTo(
         '.about-copy-wrap',
-        { x: 30, opacity: 0.5 },
+        { x: 25, opacity: 0.3 },
         {
           x: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.75,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
-            trigger: containerRef.current || '#about',
+            trigger: '.about-copy-wrap',
             start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
 
       gsap.fromTo(
         '.about-cred-card',
-        { y: 20, opacity: 0.5 },
+        { y: 20, opacity: 0.2 },
         {
           y: 0,
           opacity: 1,
@@ -54,10 +58,12 @@ export function AboutPreview() {
           duration: 0.6,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
-            trigger: containerRef.current || '#about',
-            start: 'top 88%',
+            trigger: '.about-copy-wrap',
+            start: 'top 85%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );

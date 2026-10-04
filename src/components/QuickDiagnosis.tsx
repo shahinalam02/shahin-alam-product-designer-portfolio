@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { DIAGNOSIS_OPTIONS } from '../data/portfolioData';
-import { gsap, ScrollTrigger } from '../utils/gsapSetup';
+import { gsap, ScrollTrigger, refreshScrollTrigger } from '../utils/gsapSetup';
 import { ShahinAvatar } from './ShahinAvatar';
 
 interface QuickDiagnosisProps {
@@ -17,35 +17,39 @@ export function QuickDiagnosis({ onSelectCase }: QuickDiagnosisProps) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.diag-opt-btn',
-        { y: 24, opacity: 0.3 },
+        { y: 20, opacity: 0.2 },
         {
           y: 0,
           opacity: 1,
-          stagger: 0.07,
+          stagger: 0.06,
           duration: 0.6,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '#diagnosis',
-            start: 'top 92%',
+            start: 'top 90%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
 
       gsap.fromTo(
         '.diag-output-card',
-        { scale: 0.96, opacity: 0.5 },
+        { scale: 0.97, opacity: 0.5 },
         {
           scale: 1,
           opacity: 1,
-          duration: 0.7,
+          duration: 0.6,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '#diagnosis',
-            start: 'top 92%',
+            start: 'top 90%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -61,6 +65,7 @@ export function QuickDiagnosis({ onSelectCase }: QuickDiagnosisProps) {
     if (onSelectCase) {
       onSelectCase(caseId);
     }
+    refreshScrollTrigger(120);
   };
 
   return (

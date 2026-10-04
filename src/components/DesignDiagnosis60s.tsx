@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { gsap, ScrollTrigger } from '../utils/gsapSetup';
+import { gsap, ScrollTrigger, refreshScrollTrigger } from '../utils/gsapSetup';
 import { ShahinAvatar } from './ShahinAvatar';
 
 export function DesignDiagnosis60s() {
@@ -14,17 +14,19 @@ export function DesignDiagnosis60s() {
       // Animate card stage and hotspots
       gsap.fromTo(
         '.dd-stage-card',
-        { scale: 0.96, opacity: 0.5 },
+        { scale: 0.97, opacity: 0.4 },
         {
           scale: 1,
           opacity: 1,
           duration: 0.7,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '#thinking',
             start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -34,31 +36,36 @@ export function DesignDiagnosis60s() {
         { scale: 0 },
         {
           scale: 1,
-          stagger: 0.12,
+          stagger: 0.1,
           duration: 0.5,
           ease: 'back.out(2)',
-          clearProps: 'transform',
+          clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '#thinking',
             start: 'top 85%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
 
       gsap.fromTo(
         '.dd-note-item',
-        { x: 20, opacity: 0.5 },
+        { x: 15, opacity: 0.3 },
         {
           x: 0,
           opacity: 1,
           stagger: 0.08,
           duration: 0.6,
+          ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '#thinking',
             start: 'top 85%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -294,7 +301,10 @@ export function DesignDiagnosis60s() {
               {/* Fix Toggle Button */}
               <button
                 type="button"
-                onClick={() => setIsFixed(!isFixed)}
+                onClick={() => {
+                  setIsFixed(!isFixed);
+                  refreshScrollTrigger(120);
+                }}
                 className="inline-flex items-center gap-3 bg-[var(--lime)] text-[var(--lime-ink)] border border-[var(--lime)] py-3 px-6 text-base font-bold rounded-full hover:opacity-95 transition-all self-start mt-2 group"
               >
                 <span>{isFixed ? 'Show the cluttered original' : 'Apply the fixes'}</span>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { gsap, ScrollTrigger } from '../utils/gsapSetup';
+import { gsap, ScrollTrigger, refreshScrollTrigger } from '../utils/gsapSetup';
 
 export function FeaturedStory() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,33 +12,39 @@ export function FeaturedStory() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.story-chat-bubble',
-        { x: -20, opacity: 0.5 },
+        { x: -20, opacity: 0.3 },
         {
           x: 0,
           opacity: 1,
-          stagger: 0.1,
+          stagger: 0.08,
           duration: 0.6,
+          ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '#story',
             start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
 
       gsap.fromTo(
         '.story-tab-container',
-        { y: 25, opacity: 0.5 },
+        { y: 25, opacity: 0.3 },
         {
           y: 0,
           opacity: 1,
           duration: 0.6,
+          ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '#story',
             start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -105,7 +111,10 @@ export function FeaturedStory() {
                     type="button"
                     role="tab"
                     aria-selected={isSelected}
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      refreshScrollTrigger(120);
+                    }}
                     className={`py-2 px-5 rounded-full font-bold text-sm transition-all whitespace-nowrap ${
                       isSelected
                         ? 'bg-[var(--ink)] text-[var(--paper)] shadow-sm'

@@ -28,18 +28,20 @@ export function PrinciplesSection() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.principle-card',
-        { y: 30, opacity: 0.4 },
+        { y: 25, opacity: 0.2 },
         {
           y: 0,
           opacity: 1,
-          stagger: 0.1,
+          stagger: 0.08,
           duration: 0.6,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '.principles-grid',
             start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );

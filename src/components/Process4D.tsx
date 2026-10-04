@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { PROCESS_STAGES } from '../data/portfolioData';
-import { gsap, ScrollTrigger } from '../utils/gsapSetup';
+import { gsap, ScrollTrigger, refreshScrollTrigger } from '../utils/gsapSetup';
 
 export function Process4D() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -16,18 +16,20 @@ export function Process4D() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.process-wheel-container',
-        { rotation: -25, scale: 0.9, opacity: 0.6 },
+        { rotation: -20, scale: 0.92, opacity: 0.5 },
         {
           rotation: 0,
           scale: 1,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.75,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '.process-wheel-container',
             start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -42,10 +44,12 @@ export function Process4D() {
           duration: 0.5,
           ease: 'back.out(2)',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '.process-wheel-container',
             start: 'top 85%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -53,6 +57,11 @@ export function Process4D() {
 
     return () => ctx.revert();
   }, []);
+
+  const selectStage = (idx: number) => {
+    setCurrentStage(idx);
+    refreshScrollTrigger(100);
+  };
 
   return (
     <section ref={containerRef} className="py-24 sm:py-36 lg:py-44" aria-labelledby="proc-heading">
@@ -110,7 +119,7 @@ export function Process4D() {
               {/* 01 Discover (Top) */}
               <button
                 type="button"
-                onClick={() => setCurrentStage(0)}
+                onClick={() => selectStage(0)}
                 aria-pressed={currentStage === 0}
                 className={`process-node-btn absolute left-1/2 top-[14%] -translate-x-1/2 -translate-y-1/2 w-20 sm:w-24 aspect-square rounded-full font-display font-bold text-xs sm:text-sm flex flex-col items-center justify-center transition-all cursor-pointer ${
                   currentStage === 0
@@ -125,7 +134,7 @@ export function Process4D() {
               {/* 02 Define (Right) */}
               <button
                 type="button"
-                onClick={() => setCurrentStage(1)}
+                onClick={() => selectStage(1)}
                 aria-pressed={currentStage === 1}
                 className={`process-node-btn absolute left-[86%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 sm:w-24 aspect-square rounded-full font-display font-bold text-xs sm:text-sm flex flex-col items-center justify-center transition-all cursor-pointer ${
                   currentStage === 1
@@ -140,7 +149,7 @@ export function Process4D() {
               {/* 03 Design (Bottom) */}
               <button
                 type="button"
-                onClick={() => setCurrentStage(2)}
+                onClick={() => selectStage(2)}
                 aria-pressed={currentStage === 2}
                 className={`process-node-btn absolute left-1/2 top-[86%] -translate-x-1/2 -translate-y-1/2 w-20 sm:w-24 aspect-square rounded-full font-display font-bold text-xs sm:text-sm flex flex-col items-center justify-center transition-all cursor-pointer ${
                   currentStage === 2
@@ -155,7 +164,7 @@ export function Process4D() {
               {/* 04 Demonstrate (Left) */}
               <button
                 type="button"
-                onClick={() => setCurrentStage(3)}
+                onClick={() => selectStage(3)}
                 aria-pressed={currentStage === 3}
                 className={`process-node-btn absolute left-[14%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 sm:w-24 aspect-square rounded-full font-display font-bold text-xs sm:text-sm flex flex-col items-center justify-center transition-all cursor-pointer ${
                   currentStage === 3
@@ -211,7 +220,7 @@ export function Process4D() {
                     <button
                       key={s.num}
                       type="button"
-                      onClick={() => setCurrentStage(idx)}
+                      onClick={() => selectStage(idx)}
                       aria-pressed={isCur}
                       className={`py-2 px-4 rounded-full text-xs sm:text-sm font-bold border transition-all ${
                         isCur

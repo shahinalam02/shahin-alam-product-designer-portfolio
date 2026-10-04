@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { SERVICES } from '../data/portfolioData';
-import { gsap, ScrollTrigger } from '../utils/gsapSetup';
+import { gsap, ScrollTrigger, refreshScrollTrigger } from '../utils/gsapSetup';
 import { ShahinAvatar } from './ShahinAvatar';
 
 export function ServicesAccordion() {
@@ -13,7 +13,7 @@ export function ServicesAccordion() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.svc-accordion-item',
-        { y: 25, opacity: 0.3 },
+        { y: 25, opacity: 0.2 },
         {
           y: 0,
           opacity: 1,
@@ -21,10 +21,12 @@ export function ServicesAccordion() {
           duration: 0.6,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
             trigger: containerRef.current || '#services',
-            start: 'top 92%',
+            start: 'top 90%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -35,6 +37,7 @@ export function ServicesAccordion() {
 
   const toggle = (id: string) => {
     setOpenId(openId === id ? '' : id);
+    refreshScrollTrigger(150);
   };
 
   return (

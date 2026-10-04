@@ -71,51 +71,55 @@ export function Hero() {
       // 2. Active ScrollTrigger Parallax on clue fragments inside the panel
       if (panelRef.current) {
         gsap.to('.hero-frag-1', {
-          y: -40,
-          rotation: -3,
+          y: -35,
+          rotation: -2.5,
           ease: 'none',
           scrollTrigger: {
             trigger: panelRef.current,
-            start: 'top 75%',
+            start: 'top 80%',
             end: 'bottom 15%',
-            scrub: 0.8,
+            scrub: 0.5,
+            invalidateOnRefresh: true,
           },
         });
 
         gsap.to('.hero-frag-2', {
-          y: 40,
-          rotation: 3,
+          y: 35,
+          rotation: 2.5,
           ease: 'none',
           scrollTrigger: {
             trigger: panelRef.current,
-            start: 'top 75%',
+            start: 'top 80%',
             end: 'bottom 15%',
-            scrub: 0.8,
+            scrub: 0.5,
+            invalidateOnRefresh: true,
           },
         });
 
         gsap.to('.hero-frag-3', {
-          y: -30,
-          scale: 1.04,
+          y: -25,
+          scale: 1.03,
           ease: 'none',
           scrollTrigger: {
             trigger: panelRef.current,
-            start: 'top 75%',
+            start: 'top 80%',
             end: 'bottom 15%',
-            scrub: 0.8,
+            scrub: 0.5,
+            invalidateOnRefresh: true,
           },
         });
 
         gsap.to('.hero-big-q', {
-          y: 50,
-          scale: 0.92,
+          y: 40,
+          scale: 0.94,
           opacity: 0.02,
           ease: 'none',
           scrollTrigger: {
             trigger: panelRef.current,
             start: 'top center',
             end: 'bottom top',
-            scrub: 0.5,
+            scrub: 0.4,
+            invalidateOnRefresh: true,
           },
         });
       }

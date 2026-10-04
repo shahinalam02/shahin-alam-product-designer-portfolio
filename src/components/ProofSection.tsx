@@ -18,23 +18,25 @@ export function ProofSection() {
       // 1. Stagger counter cards entrance
       gsap.fromTo(
         '.stat-card',
-        { y: 35, opacity: 0 },
+        { y: 30, opacity: 0.1 },
         {
           y: 0,
           opacity: 1,
-          stagger: 0.1,
+          stagger: 0.08,
           duration: 0.7,
           ease: 'power2.out',
           clearProps: 'all',
+          lazy: false,
           scrollTrigger: {
-            trigger: '.stats-grid',
+            trigger: containerRef.current || '.stats-grid',
             start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
 
-      // 2. Animate each counter number
+      // 2. Animate each counter number reliably together
       const numElements = gsap.utils.toArray<HTMLElement>('.stat-number');
       numElements.forEach((el) => {
         const target = parseFloat(el.getAttribute('data-target') || '0');
@@ -44,16 +46,22 @@ export function ProofSection() {
         const obj = { val: 0 };
         gsap.to(obj, {
           val: target,
-          duration: 1.5,
+          duration: 1.4,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: el,
-            start: 'top 92%',
+            trigger: containerRef.current || '.stats-grid',
+            start: 'top 88%',
             once: true,
+            fastScrollEnd: true,
           },
           onUpdate: () => {
             const current = Math.floor(obj.val);
             const formatted = isZeroPadded && current < 10 ? `0${current}` : `${current}`;
+            el.textContent = `${formatted}${suffix}`;
+          },
+          onComplete: () => {
+            const finalVal = Math.round(target);
+            const formatted = isZeroPadded && finalVal < 10 ? `0${finalVal}` : `${finalVal}`;
             el.textContent = `${formatted}${suffix}`;
           },
         });

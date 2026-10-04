@@ -10,13 +10,14 @@ export function ScrollMarquee() {
 
     const ctx = gsap.context(() => {
       gsap.to(trackRef.current, {
-        xPercent: -40,
+        xPercent: -35,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.8,
+          scrub: 0.5,
+          invalidateOnRefresh: true,
         },
       });
     }, containerRef);

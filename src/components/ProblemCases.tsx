@@ -21,32 +21,35 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
         // Entrance reveal for each card
         gsap.fromTo(
           card,
-          { y: 50, opacity: 0.3 },
+          { y: 40, opacity: 0.2 },
           {
             y: 0,
             opacity: 1,
             duration: 0.75,
             ease: 'power2.out',
-            clearProps: 'opacity',
+            clearProps: 'all',
+            lazy: false,
             scrollTrigger: {
               trigger: card,
-              start: 'top 88%',
+              start: 'top 90%',
               once: true,
+              fastScrollEnd: true,
             },
           }
         );
 
-        // Parallax drift on the mockup inside each card
+        // Subtle parallax drift on the mockup inside each card
         const preview = card.querySelector('.case-preview-container');
         if (preview) {
           gsap.to(preview, {
-            y: -25,
+            y: -20,
             ease: 'none',
             scrollTrigger: {
               trigger: card,
               start: 'top bottom',
               end: 'bottom top',
-              scrub: 0.8,
+              scrub: 0.4,
+              invalidateOnRefresh: true,
             },
           });
         }
