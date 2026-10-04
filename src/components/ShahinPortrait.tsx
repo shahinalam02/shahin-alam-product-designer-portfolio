@@ -137,18 +137,7 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
           />
 
           {/* Interactive Change Photo Overlay on hover */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              fileInputRef.current?.click();
-            }}
-            className="absolute bottom-4 right-4 bg-[var(--ink)]/85 text-[var(--paper)] text-xs font-semibold py-2 px-3.5 rounded-full shadow-lg border border-white/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 cursor-pointer hover:bg-[var(--ink)]"
-            title="Click to choose a new profile photo"
-          >
-            <Camera className="w-3.5 h-3.5 text-[var(--lime)]" />
-            <span>Change photo</span>
-          </button>
+          
         </div>
       ) : (
         /* Professional Placeholder with Direct Upload Action - NO cartoon illustration */
