@@ -29,7 +29,7 @@ export function ShahinAvatar({
       if (saved) return resolveAssetUrl(saved);
     }
     const envUrl = (import.meta as unknown as { env?: { VITE_PROFILE_IMAGE_URL?: string } }).env?.VITE_PROFILE_IMAGE_URL;
-    return envUrl ? resolveAssetUrl(envUrl) : resolveAssetUrl('shahin-alam.png');
+    return envUrl ? resolveAssetUrl(envUrl) : resolveAssetUrl('Shahin.png');
   });
 
   const [hasError, setHasError] = useState(false);
@@ -64,14 +64,14 @@ export function ShahinAvatar({
   }, []);
 
   const handleError = () => {
-    const candidates = ['shahin-portrait.jpg', 'profile.jpg', 'shahin-avatar.png'];
+    const candidates = ['Shahin.png', 'shahin-alam.png', 'shahin-portrait.jpg', 'profile.jpg', 'shahin-avatar.png'];
     const currentClean = imgSrc.replace(/^.*\//, '');
     const nextIndex = candidates.indexOf(currentClean) + 1;
 
     if (nextIndex > 0 && nextIndex < candidates.length) {
       setImgSrc(resolveAssetUrl(candidates[nextIndex]));
-    } else if (currentClean === 'shahin-alam.png') {
-      setImgSrc(resolveAssetUrl('shahin-portrait.jpg'));
+    } else if (currentClean === 'Shahin.png') {
+      setImgSrc(resolveAssetUrl('shahin-alam.png'));
     } else {
       setHasError(true);
     }
@@ -87,7 +87,7 @@ export function ShahinAvatar({
           src={imgSrc}
           alt={alt}
           onError={handleError}
-          className="w-full h-full object-cover object-[center_20%] rounded-full block"
+          className="w-full h-full object-cover object-[center_25%] rounded-full block"
           referrerPolicy="no-referrer"
         />
       ) : (

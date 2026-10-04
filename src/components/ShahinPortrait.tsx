@@ -25,10 +25,10 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
       const saved =
         localStorage.getItem('shahin_portrait_photo') ||
         localStorage.getItem('shahin_profile_photo');
-      if (saved) return saved;
+      if (saved) return resolveAssetUrl(saved);
     }
     const envUrl = (import.meta as unknown as { env?: { VITE_PROFILE_IMAGE_URL?: string } }).env?.VITE_PROFILE_IMAGE_URL;
-    return envUrl ? resolveAssetUrl(envUrl) : resolveAssetUrl('shahin-alam.png');
+    return envUrl ? resolveAssetUrl(envUrl) : resolveAssetUrl('Shahin.png');
   });
 
   const [hasError, setHasError] = useState(false);
@@ -64,14 +64,14 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
 
   const handleImageError = () => {
     // Try candidate filenames with relative base resolution
-    const candidates = ['shahin-portrait.jpg', 'profile.jpg', 'shahin-avatar.png'];
+    const candidates = ['Shahin.png', 'shahin-alam.png', 'shahin-portrait.jpg', 'profile.jpg', 'shahin-avatar.png'];
     const currentClean = photoSrc.replace(/^.*\//, '');
     const nextIndex = candidates.indexOf(currentClean) + 1;
 
     if (nextIndex > 0 && nextIndex < candidates.length) {
       setPhotoSrc(resolveAssetUrl(candidates[nextIndex]));
-    } else if (currentClean === 'shahin-alam.png') {
-      setPhotoSrc(resolveAssetUrl('shahin-portrait.jpg'));
+    } else if (currentClean === 'Shahin.png') {
+      setPhotoSrc(resolveAssetUrl('shahin-alam.png'));
     } else {
       setHasError(true);
     }
@@ -86,7 +86,7 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
       window.dispatchEvent(
         new CustomEvent('shahin-photo-updated', { detail: dataUrl })
       );
-      setUploadNotice('Photo updated! To make permanent on GitHub/Vercel, save to public/shahin-alam.png');
+      setUploadNotice('Photo updated! To make permanent on GitHub/Vercel, save to public/Shahin.png');
       setTimeout(() => setUploadNotice(null), 5000);
     } catch {
       // Ignore localStorage quota errors
@@ -151,7 +151,7 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
             src={photoSrc}
             alt="Shahin Alam · Product Designer"
             onError={handleImageError}
-            className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            className="w-full h-full object-cover object-[center_24%] transition-transform duration-500 ease-out group-hover:scale-[1.02]"
             referrerPolicy="no-referrer"
           />
 

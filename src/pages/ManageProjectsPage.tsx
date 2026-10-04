@@ -57,10 +57,10 @@ export function ManageProjectsPage() {
       return (
         localStorage.getItem('shahin_portrait_photo') ||
         localStorage.getItem('shahin_profile_photo') ||
-        '/shahin-alam.png'
+        'Shahin.png'
       );
     }
-    return '/shahin-alam.png';
+    return 'Shahin.png';
   });
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,18 +105,18 @@ export function ManageProjectsPage() {
   const handleDownloadPhoto = () => {
     const link = document.createElement('a');
     link.href = currentPhotoPreview;
-    link.download = 'shahin-alam.png';
+    link.download = 'Shahin.png';
     link.click();
-    showToast('Downloaded as shahin-alam.png! Place into your public/ folder.');
+    showToast('Downloaded as Shahin.png! Place into your public/ folder.');
   };
 
   const handleResetPhoto = () => {
     localStorage.removeItem('shahin_portrait_photo');
     localStorage.removeItem('shahin_profile_photo');
     localStorage.removeItem('shahin_custom_photo_url');
-    setCurrentPhotoPreview('/shahin-alam.png');
-    window.dispatchEvent(new CustomEvent('shahin-photo-updated', { detail: '/shahin-alam.png' }));
-    showToast('Photo reset to default /shahin-alam.png');
+    setCurrentPhotoPreview('Shahin.png');
+    window.dispatchEvent(new CustomEvent('shahin-photo-updated', { detail: 'Shahin.png' }));
+    showToast('Photo reset to default Shahin.png');
   };
 
   const showToast = (msg: string) => {
@@ -1321,29 +1321,29 @@ export function ManageProjectsPage() {
                   </form>
                 </div>
 
-                {/* Vercel Deployment Guide & Download Button */}
+                {/* Vercel & GitHub Pages Deployment Guide & Download Button */}
                 <div className="bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)] rounded-3xl p-6 sm:p-8 shadow-xl">
                   <div className="flex items-center gap-2 text-[var(--lime)] font-bold text-sm mb-2">
                     <CheckCircle2 className="w-4 h-4" />
-                    <span>How to Keep Your Photo Permanent on Vercel</span>
+                    <span>How to Keep Your Photo Permanent on GitHub Pages & Vercel</span>
                   </div>
 
                   <p className="text-xs text-[var(--panel-mute)] leading-relaxed mb-4">
-                    When deploying to Vercel, the web server looks for your image file inside your project's <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/</code> directory at <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/shahin-alam.png</code>.
+                    When deploying to GitHub Pages or Vercel, the web server serves your image file directly from your project's <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/</code> directory as <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/Shahin.png</code>.
                   </p>
 
                   <ol className="text-xs text-[var(--panel-mute)] flex flex-col gap-2 pl-4 mb-6 list-decimal">
                     <li>
-                      Click the button below to download your current photo as <strong className="text-[var(--on-panel)]">shahin-alam.png</strong>.
+                      Click the button below to download your photo as <strong className="text-[var(--on-panel)]">Shahin.png</strong>.
                     </li>
                     <li>
-                      Move that downloaded file into the <strong className="text-[var(--on-panel)]">public/</strong> folder in your local project root: <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/shahin-alam.png</code>.
+                      Save or move that file into the <strong className="text-[var(--on-panel)]">public/</strong> folder in your project: <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/Shahin.png</code>.
                     </li>
                     <li>
-                      Commit and push to GitHub: <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">git add public/shahin-alam.png && git commit -m "Add profile photo" && git push</code>.
+                      Commit and push to GitHub: <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">git add public/Shahin.png && git commit -m "Add Shahin profile photo" && git push</code>.
                     </li>
                     <li>
-                      Vercel will rebuild and your photo will be served permanently on your live domain!
+                      Both GitHub Pages and Vercel will rebuild and your photo will be served permanently on your live domain!
                     </li>
                   </ol>
 
@@ -1353,7 +1353,7 @@ export function ManageProjectsPage() {
                     className="inline-flex items-center gap-2 py-3 px-6 rounded-full bg-[var(--lime)] text-[var(--lime-ink)] font-bold text-xs sm:text-sm hover:opacity-90 shadow-md cursor-pointer"
                   >
                     <Download className="w-4 h-4" />
-                    <span>Download as shahin-alam.png</span>
+                    <span>Download as Shahin.png</span>
                   </button>
                 </div>
               </div>
