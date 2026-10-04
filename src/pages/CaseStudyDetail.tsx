@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useProjects } from '../context/ProjectsContext';
 import { CASE_STUDIES } from '../data/portfolioData';
+import {
+  FintechDashboardMockup,
+  SaaSPlatformMockup,
+  MobileCheckoutMockup,
+} from '../components/CaseStudyVisuals';
+import { CheckCircle2, TrendingUp, Sparkles, Layers, Sliders } from 'lucide-react';
 
 interface CaseStudyDetailProps {
   caseId: number;

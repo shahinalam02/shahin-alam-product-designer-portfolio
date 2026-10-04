@@ -76,7 +76,7 @@ export function Navbar({ currentRoute, theme, onToggleTheme }: NavbarProps) {
             <button
               type="button"
               onClick={onToggleTheme}
-              className="w-9 h-9 rounded-full border border-[var(--line2)] bg-[var(--card)] text-[var(--ink)] flex items-center justify-center hover:bg-[var(--soft)] transition-colors"
+              className="w-9 h-9 rounded-full border border-[var(--line2)] bg-white text-[var(--ink)] flex items-center justify-center hover:bg-[var(--soft)] transition-colors"
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
