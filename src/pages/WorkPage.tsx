@@ -19,10 +19,10 @@ export function WorkPage() {
   });
 
   return (
-    <div className="pt-28 sm:pt-36 pb-20">
+    <div className="pt-32 sm:pt-44 lg:pt-48 pb-32 sm:pb-40">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Header */}
-        <div className="flex flex-col gap-6 mb-12 sm:mb-16">
+        <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
               <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
@@ -50,7 +50,7 @@ export function WorkPage() {
             Different solutions.
           </h1>
 
-          <div className="flex items-center gap-3.5 max-w-[560px] sm:ml-20">
+          <div className="flex items-center gap-3.5 max-w-[560px] sm:ml-20 mt-6 sm:mt-10 lg:mt-14">
             <ShahinAvatar className="w-10 h-10" />
             <p className="bg-[var(--card)] border border-[var(--line)] rounded-2xl rounded-bl-sm py-2.5 px-4 text-sm text-[var(--ink)] shadow-[var(--shadow)]">
               Explore in-depth problem teardowns or browse visual client projects and design systems.
@@ -59,7 +59,7 @@ export function WorkPage() {
         </div>
 
         {/* WORK CATEGORY SELECTOR (CASE STUDIES VS VISUAL PROJECTS) */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-[var(--line)]">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-10 pb-5 border-b border-[var(--line)]">
           <div className="flex items-center gap-2 p-1.5 bg-[var(--soft)] rounded-2xl">
             <button
               type="button"
@@ -142,11 +142,11 @@ export function WorkPage() {
             CASE STUDIES GRID
         ------------------------------------------------------------- */}
         {workType === 'cases' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
             {filteredCases.map((c) => {
               const bgClass =
                 c.themeClass === 'c1'
-                  ? 'bg-[var(--panel)] text-[var(--on-panel)]'
+                  ? 'bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)]'
                   : c.themeClass === 'c2'
                   ? 'bg-[var(--lime)] text-[var(--lime-ink)]'
                   : 'bg-[var(--sun)] text-[#101114]';

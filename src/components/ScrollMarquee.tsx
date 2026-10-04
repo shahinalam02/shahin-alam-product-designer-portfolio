@@ -27,7 +27,7 @@ export function ScrollMarquee() {
   return (
     <div
       ref={containerRef}
-      className="py-5 sm:py-7 bg-[var(--ink)] text-[var(--paper)] overflow-hidden border-y border-[var(--panel-line)] select-none my-10 sm:my-16"
+      className="py-8 sm:py-12 bg-[var(--panel)] text-[var(--on-panel)] overflow-hidden border-y border-[var(--panel-line)] select-none my-20 sm:my-32 lg:my-40"
       aria-hidden="true"
     >
       <div

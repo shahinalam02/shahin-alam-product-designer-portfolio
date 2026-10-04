@@ -86,11 +86,11 @@ export function DesignDiagnosis60s() {
   ];
 
   return (
-    <section ref={containerRef} id="thinking" className="py-12 sm:py-20" aria-labelledby="dd-heading">
+    <section ref={containerRef} id="thinking" className="py-24 sm:py-36 lg:py-44" aria-labelledby="dd-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="bg-[var(--panel)] text-[var(--on-panel)] rounded-3xl sm:rounded-[48px] p-6 sm:p-12 lg:p-16 border border-[var(--panel-line)] shadow-2xl">
+        <div className="bg-[var(--panel)] text-[var(--on-panel)] rounded-3xl sm:rounded-[48px] p-8 sm:p-16 lg:p-24 border border-[var(--panel-line)] shadow-2xl">
           {/* Header */}
-          <div className="flex flex-col gap-6 mb-10 sm:mb-12">
+          <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
             <div className="inline-flex items-center gap-2 self-start bg-white/10 border border-[var(--panel-line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide text-[var(--on-panel)]">
               <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
               04 · How I think
@@ -111,7 +111,7 @@ export function DesignDiagnosis60s() {
               I'll show you how I think.
             </h2>
 
-            <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20">
+            <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20 mt-6 sm:mt-10 lg:mt-14">
               <ShahinAvatar className="w-10 h-10" />
               <p className="bg-white/10 border border-[var(--panel-line)] rounded-2xl rounded-bl-sm py-2.5 px-4 text-sm text-[var(--on-panel)]">
                 Tap the numbered markers, then apply the fixes.
@@ -120,7 +120,7 @@ export function DesignDiagnosis60s() {
           </div>
 
           {/* Interactive Playground Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.9fr] gap-8 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.9fr] gap-12 lg:gap-20 items-center">
             {/* Stage Frame (Lime Canvas) */}
             <div className="dd-stage-card relative bg-[var(--lime)] rounded-3xl p-6 sm:p-12 overflow-hidden shadow-lg select-none">
               {/* Payment Card Simulation */}
@@ -222,8 +222,8 @@ export function DesignDiagnosis60s() {
                   type="button"
                   onClick={() => setActiveNote(0)}
                   aria-pressed={activeNote === 0}
-                  className={`dd-hotspot absolute right-4 sm:right-8 top-36 sm:top-40 w-9 h-9 rounded-full bg-[var(--ink)] text-[var(--paper)] border-2 border-[var(--lime)] font-bold text-sm flex items-center justify-center transition-all ${
-                    activeNote === 0 ? 'scale-125 shadow-xl ring-2 ring-[var(--ink)]' : 'animate-ping-subtle'
+                  className={`dd-hotspot absolute right-4 sm:right-8 top-36 sm:top-40 w-9 h-9 rounded-full bg-[#101114] text-[#F5F5F2] border-2 border-[var(--lime)] font-bold text-sm flex items-center justify-center transition-all ${
+                    activeNote === 0 ? 'scale-125 shadow-xl ring-2 ring-[#101114]' : 'animate-ping-subtle'
                   }`}
                   aria-label="Issue 1: Visual Hierarchy"
                 >
@@ -237,8 +237,8 @@ export function DesignDiagnosis60s() {
                   type="button"
                   onClick={() => setActiveNote(1)}
                   aria-pressed={activeNote === 1}
-                  className={`dd-hotspot absolute left-4 sm:left-8 top-48 sm:top-56 w-9 h-9 rounded-full bg-[var(--ink)] text-[var(--paper)] border-2 border-[var(--lime)] font-bold text-sm flex items-center justify-center transition-all ${
-                    activeNote === 1 ? 'scale-125 shadow-xl ring-2 ring-[var(--ink)]' : 'animate-ping-subtle'
+                  className={`dd-hotspot absolute left-4 sm:left-8 top-48 sm:top-56 w-9 h-9 rounded-full bg-[#101114] text-[#F5F5F2] border-2 border-[var(--lime)] font-bold text-sm flex items-center justify-center transition-all ${
+                    activeNote === 1 ? 'scale-125 shadow-xl ring-2 ring-[#101114]' : 'animate-ping-subtle'
                   }`}
                   aria-label="Issue 2: Cognitive Load"
                 >
@@ -252,8 +252,8 @@ export function DesignDiagnosis60s() {
                   type="button"
                   onClick={() => setActiveNote(2)}
                   aria-pressed={activeNote === 2}
-                  className={`dd-hotspot absolute right-6 sm:right-10 bottom-8 sm:bottom-12 w-9 h-9 rounded-full bg-[var(--ink)] text-[var(--paper)] border-2 border-[var(--lime)] font-bold text-sm flex items-center justify-center transition-all ${
-                    activeNote === 2 ? 'scale-125 shadow-xl ring-2 ring-[var(--ink)]' : 'animate-ping-subtle'
+                  className={`dd-hotspot absolute right-6 sm:right-10 bottom-8 sm:bottom-12 w-9 h-9 rounded-full bg-[#101114] text-[#F5F5F2] border-2 border-[var(--lime)] font-bold text-sm flex items-center justify-center transition-all ${
+                    activeNote === 2 ? 'scale-125 shadow-xl ring-2 ring-[#101114]' : 'animate-ping-subtle'
                   }`}
                   aria-label="Issue 3: Trust and Feedback"
                 >

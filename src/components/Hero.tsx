@@ -30,98 +30,92 @@ export function Hero() {
     if (typeof window === 'undefined') return;
 
     const ctx = gsap.context(() => {
-      // 1. Entrance timeline
+      // 1. Entrance timeline with fromTo to prevent React remount opacity bugs
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       if (headlineRef.current) {
-        tl.from(headlineRef.current, {
-          y: 40,
-          opacity: 0,
-          duration: 0.9,
-        });
+        tl.fromTo(
+          headlineRef.current,
+          { y: 35, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, clearProps: 'all' }
+        );
       }
 
       if (subRowRef.current) {
-        tl.from(
+        tl.fromTo(
           subRowRef.current,
-          {
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-          },
-          '-=0.5'
+          { y: 25, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, clearProps: 'all' },
+          '-=0.45'
         );
       }
 
       if (panelRef.current) {
-        tl.from(
+        tl.fromTo(
           panelRef.current,
-          {
-            scale: 0.95,
-            y: 40,
-            opacity: 0,
-            duration: 0.9,
-          },
-          '-=0.5'
+          { scale: 0.96, y: 35, opacity: 0 },
+          { scale: 1, y: 0, opacity: 1, duration: 0.85, clearProps: 'opacity' },
+          '-=0.45'
         );
       }
 
       if (claimRef.current) {
-        tl.from(
+        tl.fromTo(
           claimRef.current,
-          {
-            y: 20,
-            opacity: 0,
-            duration: 0.6,
-          },
-          '-=0.4'
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, clearProps: 'all' },
+          '-=0.35'
         );
       }
 
       // 2. Active ScrollTrigger Parallax on clue fragments inside the panel
       if (panelRef.current) {
         gsap.to('.hero-frag-1', {
-          y: -50,
-          rotation: -4,
+          y: -40,
+          rotation: -3,
+          ease: 'none',
           scrollTrigger: {
             trigger: panelRef.current,
-            start: 'top 70%',
-            end: 'bottom 10%',
-            scrub: 1,
+            start: 'top 75%',
+            end: 'bottom 15%',
+            scrub: 0.8,
           },
         });
 
         gsap.to('.hero-frag-2', {
-          y: 45,
-          rotation: 4,
+          y: 40,
+          rotation: 3,
+          ease: 'none',
           scrollTrigger: {
             trigger: panelRef.current,
-            start: 'top 70%',
-            end: 'bottom 10%',
-            scrub: 1.2,
+            start: 'top 75%',
+            end: 'bottom 15%',
+            scrub: 0.8,
           },
         });
 
         gsap.to('.hero-frag-3', {
-          y: -40,
-          scale: 1.05,
+          y: -30,
+          scale: 1.04,
+          ease: 'none',
           scrollTrigger: {
             trigger: panelRef.current,
-            start: 'top 70%',
-            end: 'bottom 10%',
-            scrub: 1,
+            start: 'top 75%',
+            end: 'bottom 15%',
+            scrub: 0.8,
           },
         });
 
         gsap.to('.hero-big-q', {
-          y: 60,
-          scale: 0.9,
+          y: 50,
+          scale: 0.92,
           opacity: 0.02,
+          ease: 'none',
           scrollTrigger: {
             trigger: panelRef.current,
             start: 'top center',
             end: 'bottom top',
-            scrub: true,
+            scrub: 0.5,
           },
         });
       }
@@ -146,7 +140,7 @@ export function Hero() {
   };
 
   return (
-    <section ref={containerRef} className="pt-28 sm:pt-36 pb-12 sm:pb-20 relative overflow-hidden" aria-labelledby="hero-heading">
+    <section ref={containerRef} className="pt-32 sm:pt-44 lg:pt-48 pb-20 sm:pb-32 lg:pb-40 relative overflow-hidden" aria-labelledby="hero-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Main Headline */}
         <h1
@@ -171,8 +165,8 @@ export function Hero() {
         </h1>
 
         {/* Subtitle & CTAs row */}
-        <div ref={subRowRef} className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 my-8 sm:my-10">
-          <div className="max-w-[480px] text-lg sm:text-xl text-[var(--mute)] leading-relaxed">
+        <div ref={subRowRef} className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 my-10 sm:my-14 lg:my-16">
+          <div className="max-w-[520px] text-lg sm:text-xl text-[var(--mute)] leading-relaxed space-y-1">
             <p>Maybe users aren't converting.</p>
             <p>Maybe the experience feels complicated.</p>
             <p>Maybe your product simply isn't communicating its value.</p>
@@ -201,7 +195,7 @@ export function Hero() {
           ref={panelRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative bg-[var(--lime)] text-[var(--lime-ink)] rounded-3xl sm:rounded-[40px] h-[480px] sm:h-[580px] overflow-hidden p-6 sm:p-10 select-none shadow-[var(--shadow)]"
+          className="relative bg-[var(--lime)] text-[var(--lime-ink)] rounded-3xl sm:rounded-[40px] h-[480px] sm:h-[580px] overflow-hidden p-6 sm:p-10 select-none shadow-[var(--shadow)] mt-6 sm:mt-10 lg:mt-14"
         >
           {/* Subtle watermark background */}
           <span
@@ -277,7 +271,7 @@ export function Hero() {
 
           {/* Fragment 4: Pill tag */}
           <div
-            className="hidden sm:block absolute right-[8%] bottom-[12%] bg-[var(--ink)] text-[var(--paper)] px-5 py-3 rounded-full font-bold text-sm shadow-xl transition-transform duration-200 ease-out z-10"
+            className="hidden sm:block absolute right-[8%] bottom-[12%] bg-[#101114] text-[#F5F5F2] px-5 py-3 rounded-full font-bold text-sm shadow-xl transition-transform duration-200 ease-out z-10"
             style={{
               transform: `translate(${offsets.x * -12}px, ${offsets.y * -12}px)`,
             }}
@@ -299,7 +293,7 @@ export function Hero() {
               <div className="font-display font-bold text-xs">2 · Form Validation Failure</div>
               <div className="text-[var(--warn)] text-xs mt-1">"Enter a valid email"</div>
             </div>
-            <div className="bg-[var(--ink)] text-[var(--paper)] px-4 py-2 rounded-full font-bold text-xs self-start">
+            <div className="bg-[#101114] text-[#F5F5F2] px-4 py-2 rounded-full font-bold text-xs self-start">
               Spot the problem?
             </div>
           </div>

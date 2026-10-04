@@ -67,10 +67,10 @@ export function ThinkingPage() {
   ];
 
   return (
-    <div className="pt-28 sm:pt-36 pb-20">
+    <div className="pt-32 sm:pt-44 lg:pt-48 pb-32 sm:pb-40">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Header */}
-        <div className="flex flex-col gap-6 mb-16 sm:mb-20">
+        <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
           <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
             Thinking
@@ -90,7 +90,7 @@ export function ThinkingPage() {
             actually think?
           </h1>
 
-          <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20">
+          <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20 mt-6 sm:mt-10 lg:mt-14">
             <ShahinAvatar className="w-10 h-10" />
             <p className="bg-[var(--card)] border border-[var(--line)] rounded-2xl rounded-bl-sm py-2.5 px-4 text-sm text-[var(--ink)] shadow-[var(--shadow)]">
               Here are the five diagnostic lenses I use on every screen, plus an interactive self-audit for your product.
@@ -99,7 +99,7 @@ export function ThinkingPage() {
         </div>
 
         {/* Section 1: The 5 Lenses */}
-        <div className="mb-20">
+        <div className="mb-28 sm:mb-36">
           <div className="mb-8">
             <h2 className="font-display font-bold text-3xl sm:text-5xl tracking-tight mb-2">
               Five lenses I use on every screen.
@@ -242,7 +242,7 @@ export function ThinkingPage() {
                   </a>
                   <a
                     href="#/services"
-                    className="py-3 px-6 rounded-full border border-white/20 text-white font-bold text-sm hover:bg-white/10 transition-colors no-underline"
+                    className="py-3 px-6 rounded-full border border-[var(--panel-line)] text-[var(--on-panel)] font-bold text-sm hover:bg-[var(--panel-line)] transition-colors no-underline"
                   >
                     Explore UX Audit Scope
                   </a>

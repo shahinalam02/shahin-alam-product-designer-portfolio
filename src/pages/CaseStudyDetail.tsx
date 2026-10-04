@@ -63,10 +63,10 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
         aria-hidden="true"
       />
 
-      <article className="pt-28 sm:pt-36 pb-20">
+      <article className="pt-32 sm:pt-44 lg:pt-48 pb-32 sm:pb-40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
           {/* Breadcrumb & Actions */}
-          <div className="flex items-center justify-between gap-4 mb-8">
+          <div className="flex items-center justify-between gap-4 mb-10">
             <a
               href="#/work"
               className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full border border-[var(--line2)] text-xs font-bold text-[var(--ink)] hover:bg-[var(--soft)] transition-colors no-underline"
@@ -84,7 +84,7 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
           </div>
 
           {/* Case Header */}
-          <div className="flex flex-col gap-6 mb-12">
+          <div className="flex flex-col gap-6 mb-16 sm:mb-20">
             <span className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
               {currentCase.tag}
             </span>
@@ -101,7 +101,7 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
             </p>
 
             {/* Meta Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
               <div className="bg-[var(--card)] border border-[var(--line)] p-4 sm:p-5 rounded-2xl shadow-sm">
                 <small className="block font-bold text-xs text-[var(--mute)] mb-1">Context</small>
                 <p className="font-semibold text-sm sm:text-base leading-snug">{currentCase.context}</p>
@@ -122,7 +122,7 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
           </div>
 
           {/* Layout: TOC Sidebar + Deep Dive Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-10 lg:gap-16 items-start mt-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-12 lg:gap-20 items-start mt-16">
             {/* Sticky TOC */}
             <aside className="hidden lg:flex flex-col gap-1 sticky top-28" aria-label="Table of Contents">
               <small className="font-bold text-xs text-[var(--mute)] uppercase tracking-wider mb-2 px-3">
@@ -145,7 +145,7 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
             </aside>
 
             {/* Main Sections */}
-            <div className="flex flex-col gap-20">
+            <div className="flex flex-col gap-24 sm:gap-32">
               {/* 01 The Problem */}
               <section id="cs-problem" className="scroll-mt-28">
                 <div className="text-xs font-bold text-[var(--mute)] mb-2 uppercase tracking-wider">01 · The Problem</div>
@@ -157,7 +157,7 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
                     <span className="font-bold text-xs text-[var(--mute)] block mb-1">Client Brief</span>
                     Users drop off without completing their setup or articulating value.
                   </div>
-                  <div className="bg-[var(--ink)] text-[var(--paper)] p-5 rounded-2xl text-sm sm:text-base leading-relaxed">
+                  <div className="bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)] p-5 rounded-2xl text-sm sm:text-base leading-relaxed shadow-sm">
                     <span className="font-bold text-xs text-[var(--lime)] block mb-1">Design Diagnosis</span>
                     {currentCase.problem}
                   </div>

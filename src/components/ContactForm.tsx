@@ -40,11 +40,11 @@ export function ContactForm() {
   };
 
   return (
-    <section id="start" className="py-12 sm:py-20" aria-labelledby="contact-heading">
+    <section id="start" className="py-24 sm:py-36 lg:py-44" aria-labelledby="contact-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="bg-[var(--panel)] text-[var(--on-panel)] rounded-3xl sm:rounded-[48px] p-6 sm:p-14 lg:p-20 border border-[var(--panel-line)] shadow-2xl">
+        <div className="bg-[var(--panel)] text-[var(--on-panel)] rounded-3xl sm:rounded-[48px] p-8 sm:p-16 lg:p-24 border border-[var(--panel-line)] shadow-2xl">
           {/* Header */}
-          <div className="flex flex-col gap-6 mb-8">
+          <div className="flex flex-col gap-6 mb-12 sm:mb-16 lg:mb-20">
             <div className="inline-flex items-center gap-2 self-start bg-white/10 border border-[var(--panel-line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide text-[var(--on-panel)]">
               <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
               12 · Your turn
@@ -84,8 +84,8 @@ export function ContactForm() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Hi, I'm..."
-                  className={`bg-white/5 border rounded-2xl py-3.5 px-4 text-base text-[var(--on-panel)] placeholder:text-white/30 focus:outline-none transition-colors ${
-                    errors.name ? 'border-red-400 bg-red-950/20' : 'border-transparent focus:border-[var(--lime)]'
+                  className={`bg-white/5 border rounded-2xl py-3.5 px-4 text-base text-[var(--on-panel)] placeholder:text-[var(--panel-mute)] focus:outline-none transition-colors ${
+                    errors.name ? 'border-red-400 bg-red-950/20' : 'border-[var(--panel-line)] focus:border-[var(--lime)]'
                   }`}
                 />
                 {errors.name && <span className="text-red-400 text-xs font-semibold">Please tell me what to call you.</span>}
@@ -102,8 +102,8 @@ export function ContactForm() {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="you@company.com"
-                  className={`bg-white/5 border rounded-2xl py-3.5 px-4 text-base text-[var(--on-panel)] placeholder:text-white/30 focus:outline-none transition-colors ${
-                    errors.email ? 'border-red-400 bg-red-950/20' : 'border-transparent focus:border-[var(--lime)]'
+                  className={`bg-white/5 border rounded-2xl py-3.5 px-4 text-base text-[var(--on-panel)] placeholder:text-[var(--panel-mute)] focus:outline-none transition-colors ${
+                    errors.email ? 'border-red-400 bg-red-950/20' : 'border-[var(--panel-line)] focus:border-[var(--lime)]'
                   }`}
                 />
                 {errors.email && <span className="text-red-400 text-xs font-semibold">Enter a valid email address I can reply to.</span>}
@@ -146,8 +146,8 @@ export function ContactForm() {
                   value={formData.problem}
                   onChange={(e) => setFormData({ ...formData, problem: e.target.value })}
                   placeholder="Users drop off at signup. The product is hard to explain. Anything on your mind."
-                  className={`bg-white/5 border rounded-2xl p-4 text-base text-[var(--on-panel)] placeholder:text-white/30 focus:outline-none resize-y transition-colors ${
-                    errors.problem ? 'border-red-400 bg-red-950/20' : 'border-transparent focus:border-[var(--lime)]'
+                  className={`bg-white/5 border rounded-2xl p-4 text-base text-[var(--on-panel)] placeholder:text-[var(--panel-mute)] focus:outline-none resize-y transition-colors ${
+                    errors.problem ? 'border-red-400 bg-red-950/20' : 'border-[var(--panel-line)] focus:border-[var(--lime)]'
                   }`}
                 />
                 {errors.problem && <span className="text-red-400 text-xs font-semibold">Even a single sentence helps me prepare.</span>}
@@ -190,7 +190,7 @@ export function ContactForm() {
                   value={formData.budget}
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                   placeholder="A rough range is fine"
-                  className="bg-white/5 border border-transparent focus:border-[var(--lime)] rounded-2xl py-3.5 px-4 text-base text-[var(--on-panel)] placeholder:text-white/30 focus:outline-none"
+                  className="bg-white/5 border border-[var(--panel-line)] focus:border-[var(--lime)] rounded-2xl py-3.5 px-4 text-base text-[var(--on-panel)] placeholder:text-[var(--panel-mute)] focus:outline-none"
                 />
               </div>
 

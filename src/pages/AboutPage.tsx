@@ -37,10 +37,10 @@ export function AboutPage() {
   ];
 
   return (
-    <div className="pt-28 sm:pt-36 pb-20">
+    <div className="pt-32 sm:pt-44 lg:pt-48 pb-32 sm:pb-40">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Hero */}
-        <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-center mb-16 sm:mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-24 items-center mb-20 sm:mb-28 lg:mb-32">
           <ShahinPortrait className="max-w-[460px] mx-auto lg:mx-0 w-full" />
 
           <div className="flex flex-col gap-6">
@@ -56,7 +56,7 @@ export function AboutPage() {
               Who's actually behind the work?
             </h1>
 
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-3.5 mt-6 sm:mt-10 lg:mt-12">
               <ShahinAvatar className="w-10 h-10" />
               <p className="bg-[var(--card)] border border-[var(--line)] rounded-2xl rounded-bl-sm py-2.5 px-4 text-sm text-[var(--ink)] shadow-[var(--shadow)]">
                 A little more about my journey, technical background, and how I collaborate.
@@ -76,7 +76,7 @@ export function AboutPage() {
               <span className="font-bold text-xs text-[var(--mute)] block mb-1">Founder / Client</span>
               What is your background and training?
             </div>
-            <div className="bg-[var(--ink)] text-[var(--paper)] py-3.5 px-5 rounded-2xl self-start text-sm sm:text-base leading-relaxed">
+            <div className="bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)] py-3.5 px-5 rounded-2xl self-start text-sm sm:text-base leading-relaxed shadow-sm">
               <span className="font-bold text-xs text-[var(--lime)] block mb-1">Shahin Alam</span>
               I come from a Computer Science & Engineering (CSE) background. That means I understand component lifecycles, API constraints, and responsive CSS—I design with technical feasibility baked in from day one.
             </div>
@@ -85,7 +85,7 @@ export function AboutPage() {
               <span className="font-bold text-xs text-[var(--mute)] block mb-1">Founder / Client</span>
               What does your day-to-day engagement look like?
             </div>
-            <div className="bg-[var(--ink)] text-[var(--paper)] py-3.5 px-5 rounded-2xl self-start text-sm sm:text-base leading-relaxed">
+            <div className="bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)] py-3.5 px-5 rounded-2xl self-start text-sm sm:text-base leading-relaxed shadow-sm">
               <span className="font-bold text-xs text-[var(--lime)] block mb-1">Shahin Alam</span>
               I dig into the root problem, structure the user journey, prototype the highest-friction screens, and test them with real users. Then I deliver clean, tokenized Figma files with comprehensive state documentation for your engineers.
             </div>

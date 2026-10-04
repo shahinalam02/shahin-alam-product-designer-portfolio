@@ -21,10 +21,10 @@ export function ServicesPage() {
   ];
 
   return (
-    <div className="pt-28 sm:pt-36 pb-20">
+    <div className="pt-32 sm:pt-44 lg:pt-48 pb-32 sm:pb-40">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Header */}
-        <div className="flex flex-col gap-6 mb-16 sm:mb-20">
+        <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
           <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
             Services
@@ -43,7 +43,7 @@ export function ServicesPage() {
             build together?
           </h1>
 
-          <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20">
+          <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20 mt-6 sm:mt-10 lg:mt-14">
             <ShahinAvatar className="w-10 h-10" />
             <p className="bg-[var(--card)] border border-[var(--line)] rounded-2xl rounded-bl-sm py-2.5 px-4 text-sm text-[var(--ink)] shadow-[var(--shadow)]">
               Five ways we can collaborate. Not sure where to begin? A 5-day UX audit is usually the highest-ROI starting point.
@@ -52,23 +52,37 @@ export function ServicesPage() {
         </div>
 
         {/* Detailed Service Blocks */}
-        <div className="flex flex-col gap-6 mb-20">
+        <div className="flex flex-col gap-10 sm:gap-14 mb-28">
           {SERVICES.map((s, idx) => {
             const isDark = idx === 1;
             const isLime = idx === 2;
             const isSun = idx === 3;
 
             const cardBg = isDark
-              ? 'bg-[var(--panel)] text-[var(--on-panel)]'
+              ? 'bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)]'
               : isLime
-              ? 'bg-[var(--lime)] text-[var(--lime-ink)]'
+              ? 'bg-[var(--lime)] text-[var(--lime-ink)] shadow-md'
               : isSun
-              ? 'bg-[var(--sun)] text-[#101114]'
-              : 'bg-[var(--card)] text-[var(--ink)] border border-[var(--line)]';
+              ? 'bg-[var(--sun)] text-[#101114] shadow-md'
+              : 'bg-[var(--card)] text-[var(--ink)] border border-[var(--line)] shadow-sm';
 
             const ctaBtn = isDark
               ? 'bg-[var(--lime)] text-[var(--lime-ink)] border-[var(--lime)]'
-              : 'bg-[#101114] text-[#F5F5F2] border-[#101114]';
+              : isLime || isSun
+              ? 'bg-[#101114] text-[#F5F5F2] border-[#101114]'
+              : 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]';
+
+            const deliverablePillClass = isDark
+              ? 'bg-white/10 text-[var(--on-panel)] border border-[var(--panel-line)]'
+              : isLime || isSun
+              ? 'bg-[#101114]/10 text-inherit border border-[#101114]/15'
+              : 'bg-[var(--soft)] text-[var(--ink)] border border-[var(--line)]';
+
+            const flowPillClass = isDark
+              ? 'bg-white/15 text-[var(--on-panel)]'
+              : isLime || isSun
+              ? 'bg-[#101114] text-[var(--lime)] font-bold'
+              : 'bg-[var(--soft)] text-[var(--ink)] border border-[var(--line)]';
 
             return (
               <article
@@ -91,7 +105,9 @@ export function ServicesPage() {
                     className={`inline-flex items-center gap-3 border py-2.5 pl-6 pr-2.5 text-sm sm:text-base font-bold rounded-full hover:opacity-90 transition-all group no-underline ${ctaBtn}`}
                   >
                     <span>Talk about this</span>
-                    <span className="w-8 h-8 rounded-full bg-[var(--lime)] text-[var(--lime-ink)] flex items-center justify-center text-base font-bold group-hover:rotate-[-45deg] transition-transform duration-200">
+                    <span className={`w-8 h-8 rounded-full flex items-center justify-center text-base font-bold group-hover:rotate-[-45deg] transition-transform duration-200 ${
+                      isDark ? 'bg-[var(--lime-ink)] text-[var(--lime)]' : 'bg-[var(--lime)] text-[var(--lime-ink)]'
+                    }`}>
                       →
                     </span>
                   </a>
@@ -109,7 +125,7 @@ export function ServicesPage() {
                       {s.whatYouGet.map((item) => (
                         <span
                           key={item}
-                          className="py-2 px-4 rounded-full text-xs sm:text-sm font-semibold bg-black/10 dark:bg-white/10"
+                          className={`py-2 px-4 rounded-full text-xs sm:text-sm font-semibold ${deliverablePillClass}`}
                         >
                           {item}
                         </span>
@@ -122,7 +138,7 @@ export function ServicesPage() {
                     <div className="flex flex-wrap items-center gap-2">
                       {s.flow.map((st, i) => (
                         <span key={st} className="flex items-center gap-2">
-                          <span className="py-1.5 px-3.5 rounded-full bg-white/20 text-xs font-bold">
+                          <span className={`py-1.5 px-3.5 rounded-full text-xs font-bold ${flowPillClass}`}>
                             {st}
                           </span>
                           {i < s.flow.length - 1 && <span className="opacity-40 text-xs">→</span>}

@@ -64,10 +64,10 @@ export function QuickDiagnosis({ onSelectCase }: QuickDiagnosisProps) {
   };
 
   return (
-    <section ref={containerRef} id="diagnosis" className="py-16 sm:py-24" aria-labelledby="diag-heading">
+    <section ref={containerRef} id="diagnosis" className="py-24 sm:py-36 lg:py-44" aria-labelledby="diag-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Question Header */}
-        <div className="flex flex-col gap-6 mb-10 sm:mb-14">
+        <div className="flex flex-col gap-6 mb-14 sm:mb-20 lg:mb-24">
           <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
             02 · Quick diagnosis
@@ -88,7 +88,7 @@ export function QuickDiagnosis({ onSelectCase }: QuickDiagnosisProps) {
             going wrong?
           </h2>
 
-          <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20">
+          <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20 mt-6 sm:mt-10 lg:mt-14">
             <ShahinAvatar className="w-10 h-10" />
             <p className="bg-[var(--card)] border border-[var(--line)] rounded-2xl rounded-bl-sm py-2.5 px-4 text-sm text-[var(--ink)] shadow-[var(--shadow)]">
               Pick the closest one. I'll point you to the work that matches.
@@ -97,7 +97,7 @@ export function QuickDiagnosis({ onSelectCase }: QuickDiagnosisProps) {
         </div>
 
         {/* Diagnosis Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-6 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-16 items-start">
           {/* Radio Options */}
           <div className="diag-opts-list flex flex-col gap-2.5" role="radiogroup" aria-label="What's going wrong?">
             {DIAGNOSIS_OPTIONS.map((item) => {
@@ -163,7 +163,7 @@ export function QuickDiagnosis({ onSelectCase }: QuickDiagnosisProps) {
                   {selectedData.secondaryCta && selectedData.secondaryHref && (
                     <a
                       href={selectedData.secondaryHref}
-                      className="py-2.5 px-5 rounded-full border border-white/20 text-white font-bold text-xs sm:text-sm hover:bg-white/10 transition-colors no-underline"
+                      className="py-2.5 px-5 rounded-full border border-[var(--panel-line)] text-[var(--on-panel)] font-bold text-xs sm:text-sm hover:bg-[var(--panel-line)] transition-colors no-underline"
                     >
                       {selectedData.secondaryCta}
                     </a>

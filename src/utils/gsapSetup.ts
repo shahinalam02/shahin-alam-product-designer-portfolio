@@ -3,10 +3,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
-  // Default ease
+
+  // Prevent mobile browser toolbar jumpiness
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+    autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load,resize',
+  });
+
+  // Global defaults for snappy, natural motion
   gsap.defaults({
     ease: 'power3.out',
-    duration: 0.8,
+    duration: 0.7,
   });
 }
 

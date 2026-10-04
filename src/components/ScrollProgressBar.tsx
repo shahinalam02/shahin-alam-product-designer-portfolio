@@ -8,16 +8,20 @@ export function ScrollProgressBar() {
     if (typeof window === 'undefined' || !barRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(barRef.current, {
-        scaleX: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: document.documentElement,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0.15,
-        },
-      });
+      gsap.fromTo(
+        barRef.current,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: {
+            start: 0,
+            end: 'max',
+            scrub: 0.15,
+            invalidateOnRefresh: true,
+          },
+        }
+      );
     });
 
     return () => ctx.revert();

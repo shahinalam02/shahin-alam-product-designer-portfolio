@@ -16,17 +16,23 @@ export function ProofSection() {
 
     const ctx = gsap.context(() => {
       // 1. Stagger counter cards entrance
-      gsap.from('.stat-card', {
-        y: 40,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: '.stats-grid',
-          start: 'top 88%',
-          toggleActions: 'play none none reverse',
-        },
-      });
+      gsap.fromTo(
+        '.stat-card',
+        { y: 35, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          duration: 0.7,
+          ease: 'power2.out',
+          clearProps: 'all',
+          scrollTrigger: {
+            trigger: '.stats-grid',
+            start: 'top 88%',
+            once: true,
+          },
+        }
+      );
 
       // 2. Animate each counter number
       const numElements = gsap.utils.toArray<HTMLElement>('.stat-number');
@@ -38,12 +44,12 @@ export function ProofSection() {
         const obj = { val: 0 };
         gsap.to(obj, {
           val: target,
-          duration: 1.6,
+          duration: 1.5,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse',
+            start: 'top 92%',
+            once: true,
           },
           onUpdate: () => {
             const current = Math.floor(obj.val);
@@ -58,10 +64,10 @@ export function ProofSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-12 sm:py-20" aria-labelledby="proof-heading">
+    <section ref={containerRef} className="py-24 sm:py-36 lg:py-44" aria-labelledby="proof-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Header */}
-        <div className="flex flex-col gap-6 mb-10 sm:mb-14">
+        <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
           <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
             11 · Evidence
@@ -83,7 +89,7 @@ export function ProofSection() {
         </div>
 
         {/* 4 Counter Cards */}
-        <div className="stats-grid grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4">
+        <div className="stats-grid grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
           {stats.map((s, idx) => (
             <div
               key={s.label}

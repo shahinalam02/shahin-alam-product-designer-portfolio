@@ -55,11 +55,11 @@ export function Process4D() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-12 sm:py-20" aria-labelledby="proc-heading">
+    <section ref={containerRef} className="py-24 sm:py-36 lg:py-44" aria-labelledby="proc-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="bg-[var(--card)] border border-[var(--line)] rounded-3xl sm:rounded-[48px] p-6 sm:p-14 lg:p-18 shadow-xl">
+        <div className="bg-[var(--card)] border border-[var(--line)] rounded-3xl sm:rounded-[48px] p-8 sm:p-16 lg:p-24 shadow-xl">
           {/* Header */}
-          <div className="flex flex-col gap-6 mb-12">
+          <div className="flex flex-col gap-6 mb-16 sm:mb-20 lg:mb-24">
             <div className="inline-flex items-center gap-2 self-start bg-[var(--soft)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
               <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
               09 · The 4D method
@@ -81,7 +81,7 @@ export function Process4D() {
           </div>
 
           {/* Grid Layout: Wheel on left, Stage Details on right */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
             {/* Interactive Circular Wheel */}
             <div className="process-wheel-container relative aspect-square max-w-[440px] w-full mx-auto select-none">
               <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">

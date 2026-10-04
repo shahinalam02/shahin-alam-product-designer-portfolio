@@ -8,7 +8,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="py-12 border-t border-[var(--line)] bg-[var(--paper)] text-[var(--mute)] text-xs sm:text-sm">
+    <footer className="py-16 sm:py-24 border-t border-[var(--line)] bg-[var(--paper)] text-[var(--mute)] text-xs sm:text-sm">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
         <div>
           <span className="font-bold text-[var(--ink)] block mb-1">

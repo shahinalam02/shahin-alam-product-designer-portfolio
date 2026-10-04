@@ -93,8 +93,10 @@ export default function App() {
       }
 
       // Refresh GSAP ScrollTrigger measurements on route changes
-      requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
+      const rafId = requestAnimationFrame(() => {
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 60);
       });
     };
 
@@ -102,8 +104,8 @@ export default function App() {
     handleHashChange();
 
     // Ensure ScrollTrigger accurately calculates measurements after fonts and assets load
-    const timer1 = setTimeout(() => ScrollTrigger.refresh(), 150);
-    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 500);
+    const timer1 = setTimeout(() => ScrollTrigger.refresh(), 200);
+    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 800);
 
     return () => {
       window.removeEventListener('hashchange', handleHashChange);

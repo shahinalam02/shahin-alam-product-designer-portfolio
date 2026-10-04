@@ -67,10 +67,10 @@ export function AboutPreview() {
   }, []);
 
   return (
-    <section ref={containerRef} id="about" className="py-12 sm:py-20" aria-labelledby="about-preview-heading">
+    <section ref={containerRef} id="about" className="py-24 sm:py-36 lg:py-44" aria-labelledby="about-preview-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="flex flex-col gap-6 mb-10 sm:mb-14">
+        <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
           <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
             08 · About
@@ -93,7 +93,7 @@ export function AboutPreview() {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-24 items-center">
           {/* Real Portrait with caption (Shahin Alam · Product Designer) */}
           <div className="about-portrait-wrap w-full max-w-[460px] mx-auto lg:mx-0">
             <ShahinPortrait />

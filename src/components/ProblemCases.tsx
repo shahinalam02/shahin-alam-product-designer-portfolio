@@ -16,48 +16,37 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
     if (typeof window === 'undefined') return;
 
     const ctx = gsap.context(() => {
-      // Animate each case study card on scroll
       const cards = gsap.utils.toArray<HTMLElement>('.case-card-item');
-      cards.forEach((card, i) => {
+      cards.forEach((card) => {
         // Entrance reveal for each card
-        gsap.from(card, {
-          y: 80,
-          opacity: 0.1,
-          scale: 0.96,
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 88%',
-            end: 'top 50%',
-            toggleActions: 'play none none reverse',
-          },
-        });
-
-        // Card stacking depth effect: scale down previous card as the next one advances
-        if (i < cards.length - 1) {
-          gsap.to(card, {
-            scale: 0.94,
-            opacity: 0.75,
+        gsap.fromTo(
+          card,
+          { y: 50, opacity: 0.3 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.75,
+            ease: 'power2.out',
+            clearProps: 'opacity',
             scrollTrigger: {
-              trigger: cards[i + 1],
-              start: 'top 75%',
-              end: 'top 25%',
-              scrub: true,
+              trigger: card,
+              start: 'top 88%',
+              once: true,
             },
-          });
-        }
+          }
+        );
 
         // Parallax drift on the mockup inside each card
         const preview = card.querySelector('.case-preview-container');
         if (preview) {
           gsap.to(preview, {
-            y: -35,
+            y: -25,
+            ease: 'none',
             scrollTrigger: {
               trigger: card,
               start: 'top bottom',
               end: 'bottom top',
-              scrub: 1,
+              scrub: 0.8,
             },
           });
         }
@@ -65,13 +54,13 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [caseList.length]);
 
   return (
-    <section ref={containerRef} id="work" className="py-12 sm:py-20" aria-labelledby="work-heading">
+    <section ref={containerRef} id="work" className="py-24 sm:py-36 lg:py-44" aria-labelledby="work-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="flex flex-col gap-6 mb-12 sm:mb-16">
+        <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
           <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
             03 · Work, sorted by problem
@@ -113,7 +102,7 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20">
+          <div className="flex items-center gap-3.5 max-w-[540px] sm:ml-20 mt-6 sm:mt-10 lg:mt-14">
             <ShahinAvatar className="w-10 h-10" />
             <p className="bg-[var(--card)] border border-[var(--line)] rounded-2xl rounded-bl-sm py-2.5 px-4 text-sm text-[var(--ink)] shadow-[var(--shadow)]">
               Every project starts with what wasn't working, not what got built.
@@ -122,17 +111,17 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
         </div>
 
         {/* Stacked Case Studies */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-12 sm:gap-20 lg:gap-28">
           {caseList.map((c, index) => {
             const isHighlighted = highlightedCaseId === c.id;
 
             // Background theme classes
             const bgClass =
               c.themeClass === 'c1'
-                ? 'bg-[var(--panel)] text-[var(--on-panel)]'
+                ? 'bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)]'
                 : c.themeClass === 'c2'
-                ? 'bg-[var(--lime)] text-[var(--lime-ink)]'
-                : 'bg-[var(--sun)] text-[#101114]';
+                ? 'bg-[var(--lime)] text-[var(--lime-ink)] shadow-md'
+                : 'bg-[var(--sun)] text-[#101114] shadow-md';
 
             const buttonClass =
               c.themeClass === 'c1'
@@ -148,7 +137,7 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
               <article
                 key={c.id}
                 id={`case${c.id}`}
-                className={`case-card-item rounded-3xl sm:rounded-[40px] p-6 sm:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-8 lg:gap-14 items-center transition-all duration-300 ${bgClass} ${
+                className={`case-card-item rounded-3xl sm:rounded-[44px] p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-8 lg:gap-14 items-center transition-all duration-300 ${bgClass} ${
                   isHighlighted ? 'ring-4 ring-[var(--paper)] ring-offset-4 ring-offset-[var(--ink)] shadow-2xl' : ''
                 }`}
                 style={{
@@ -191,9 +180,9 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
                 {/* Simulated Visual UI Preview */}
                 <div className="case-preview-container relative grid place-items-center w-full" aria-hidden="true">
                   {c.id === 1 && (
-                    <div className="w-full bg-[var(--card)] text-[var(--ink)] rounded-2xl overflow-hidden shadow-2xl border border-[var(--line)] text-xs">
+                    <div className="w-full bg-[var(--card)] dark:bg-[#20232D] text-[var(--ink)] rounded-2xl overflow-hidden shadow-2xl border border-[var(--line)] dark:border-white/10 text-xs">
                       {/* Window Topbar */}
-                      <div className="flex items-center gap-1.5 py-2.5 px-3.5 border-b border-[var(--line)]">
+                      <div className="flex items-center gap-1.5 py-2.5 px-3.5 border-b border-[var(--line)] dark:border-white/10 bg-[var(--card)] dark:bg-[#20232D]">
                         <i className="w-2.5 h-2.5 rounded-full bg-red-400"></i>
                         <i className="w-2.5 h-2.5 rounded-full bg-yellow-400"></i>
                         <i className="w-2.5 h-2.5 rounded-full bg-green-400"></i>
@@ -201,7 +190,7 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
                       </div>
                       {/* App Layout */}
                       <div className="grid grid-cols-[80px_1fr] min-h-[220px]">
-                        <div className="border-r border-[var(--line)] p-3 flex flex-col gap-2 bg-[var(--soft)]/30">
+                        <div className="border-r border-[var(--line)] dark:border-white/10 p-3 flex flex-col gap-2 bg-[var(--soft)]/50 dark:bg-[#181B22]">
                           <div className="h-2 bg-[var(--ink)]/15 rounded w-full"></div>
                           <div className="h-2 bg-[var(--ink)]/15 rounded w-4/5"></div>
                           <div className="h-2 bg-[var(--ink)]/15 rounded w-3/5"></div>
@@ -278,7 +267,7 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
                   {c.id === 3 && (
                     <div className="flex items-center justify-center gap-3 sm:gap-6 w-full py-4">
                       {/* Old flow: 6 steps */}
-                      <div className="w-[45%] max-w-[190px] aspect-[9/16] border-2 border-[var(--ink)] rounded-3xl bg-[var(--card)] text-[var(--ink)] p-3 sm:p-4 flex flex-col gap-2 text-[11px] opacity-60 -rotate-3 shadow-md">
+                      <div className="w-[45%] max-w-[190px] aspect-[9/16] border-2 border-[#101114]/70 rounded-3xl bg-[var(--card)] text-[var(--ink)] p-3 sm:p-4 flex flex-col gap-2 text-[11px] opacity-70 -rotate-3 shadow-md">
                         <div className="flex gap-1">
                           <i className="flex-1 h-1 bg-[var(--ink)] rounded"></i>
                           <i className="flex-1 h-1 bg-[var(--ink)] rounded"></i>
@@ -295,10 +284,10 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
                         <div className="h-1.5 bg-[var(--ink)]/15 rounded w-full mt-2"></div>
                       </div>
 
-                      <span className="font-hand font-bold text-3xl sm:text-4xl text-[var(--ink)]">→</span>
+                      <span className="font-hand font-bold text-3xl sm:text-4xl text-[#101114]">→</span>
 
                       {/* New flow: 2 stages */}
-                      <div className="w-[48%] max-w-[210px] aspect-[9/16] border-2 border-[var(--ink)] rounded-3xl bg-[var(--card)] text-[var(--ink)] p-3 sm:p-4 flex flex-col gap-2.5 text-[11px] shadow-2xl">
+                      <div className="w-[48%] max-w-[210px] aspect-[9/16] border-2 border-[#101114] rounded-3xl bg-[var(--card)] text-[var(--ink)] p-3 sm:p-4 flex flex-col gap-2.5 text-[11px] shadow-2xl">
                         <div className="flex gap-1.5">
                           <i className="flex-1 h-1.5 bg-[var(--ink)] rounded"></i>
                           <i className="flex-1 h-1.5 bg-[var(--soft)] rounded"></i>
@@ -309,7 +298,7 @@ export function ProblemCases({ highlightedCaseId }: ProblemCasesProps) {
                         </div>
                         <div className="h-1.5 bg-[var(--ink)]/20 rounded w-full"></div>
                         <div className="h-1.5 bg-[var(--ink)]/15 rounded w-4/5"></div>
-                        <div className="mt-auto py-2 rounded-full bg-[var(--ink)] text-[var(--paper)] text-center font-bold text-xs">
+                        <div className="mt-auto py-2 rounded-full bg-[#101114] text-[#F5F5F2] text-center font-bold text-xs">
                           Continue
                         </div>
                       </div>

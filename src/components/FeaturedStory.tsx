@@ -55,10 +55,10 @@ export function FeaturedStory() {
   ];
 
   return (
-    <section ref={containerRef} id="story" className="py-12 sm:py-20" aria-labelledby="story-heading">
+    <section ref={containerRef} id="story" className="py-24 sm:py-36 lg:py-44" aria-labelledby="story-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="flex flex-col gap-6 mb-10 sm:mb-12">
+        <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
           <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
             05 · Featured case study
@@ -80,14 +80,14 @@ export function FeaturedStory() {
         </div>
 
         {/* Narrative Flow */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-12 sm:gap-16 lg:gap-20">
           {/* Chat Bubble 1 */}
-          <div className="story-chat-wrap flex flex-col gap-3 max-w-[620px]">
-            <div className="story-chat-bubble bg-[var(--ink)] text-[var(--paper)] py-3.5 px-5 rounded-3xl rounded-br-sm self-start text-sm sm:text-base leading-relaxed shadow-sm">
-              <span className="block text-xs font-bold opacity-60 mb-1">Designer</span>
+          <div className="story-chat-wrap flex flex-col gap-4 max-w-[640px]">
+            <div className="story-chat-bubble bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)] py-4 px-6 rounded-3xl rounded-br-sm self-start text-sm sm:text-base leading-relaxed shadow-sm">
+              <span className="block text-xs font-bold text-[var(--lime)] mb-1">Designer</span>
               Users were struggling because the crucial next action was buried inside an intimidating 7-field form.
             </div>
-            <div className="story-chat-bubble bg-[var(--card)] border border-[var(--line)] text-[var(--ink)] py-3 px-5 rounded-3xl rounded-bl-sm self-start text-sm sm:text-base shadow-[var(--shadow)]">
+            <div className="story-chat-bubble bg-[var(--card)] border border-[var(--line)] text-[var(--ink)] py-3.5 px-6 rounded-3xl rounded-bl-sm self-start text-sm sm:text-base shadow-[var(--shadow)] ml-4 sm:ml-8">
               <span className="block text-xs font-bold text-[var(--mute)] mb-1">Client</span>
               So what changed?
             </div>

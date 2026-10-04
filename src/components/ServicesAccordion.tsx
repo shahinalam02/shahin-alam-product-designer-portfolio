@@ -38,10 +38,10 @@ export function ServicesAccordion() {
   };
 
   return (
-    <section ref={containerRef} id="services" className="py-12 sm:py-20" aria-labelledby="svc-heading">
+    <section ref={containerRef} id="services" className="py-24 sm:py-36 lg:py-44" aria-labelledby="svc-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="flex flex-col gap-6 mb-10 sm:mb-14">
+        <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
           <div className="inline-flex items-center gap-2 self-start bg-[var(--card)] border border-[var(--line)] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[var(--lime)] shadow-[0_0_0_1.5px_var(--ink)]"></span>
             10 · Services
@@ -73,7 +73,7 @@ export function ServicesAccordion() {
             </a>
           </div>
 
-          <div className="flex items-center gap-3.5 max-w-[480px] sm:ml-20">
+          <div className="flex items-center gap-3.5 max-w-[480px] sm:ml-20 mt-6 sm:mt-10 lg:mt-14">
             <ShahinAvatar className="w-10 h-10" />
             <p className="bg-[var(--card)] border border-[var(--line)] rounded-2xl rounded-bl-sm py-2.5 px-4 text-sm text-[var(--ink)] shadow-[var(--shadow)]">
               Pick one to see how I'd approach it from first principles.
@@ -82,7 +82,7 @@ export function ServicesAccordion() {
         </div>
 
         {/* Accordion List */}
-        <div className="svc-list-wrap flex flex-col gap-3">
+        <div className="svc-list-wrap flex flex-col gap-4 sm:gap-5">
           {SERVICES.map((s) => {
             const isOpen = openId === s.id;
             return (
@@ -90,7 +90,7 @@ export function ServicesAccordion() {
                 key={s.id}
                 className={`svc-accordion-item rounded-3xl border transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)] shadow-xl'
+                    ? 'bg-[var(--panel)] text-[var(--on-panel)] border-[var(--panel-line)] shadow-xl'
                     : 'bg-[var(--card)] text-[var(--ink)] border-[var(--line)] hover:border-[var(--line2)]'
                 }`}
               >
@@ -126,7 +126,7 @@ export function ServicesAccordion() {
                             className={`py-2 px-4 rounded-full text-xs sm:text-sm font-bold ${
                               idx === s.flow.length - 1
                                 ? 'bg-[var(--lime)] text-[var(--lime-ink)]'
-                                : 'bg-white/10 text-white'
+                                : 'bg-white/10 text-[var(--on-panel)]'
                             }`}
                           >
                             {step}

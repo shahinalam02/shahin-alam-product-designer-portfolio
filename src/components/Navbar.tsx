@@ -158,7 +158,7 @@ export function Navbar({ currentRoute, theme, onToggleTheme }: NavbarProps) {
             <button
               type="button"
               onClick={onToggleTheme}
-              className="px-4 py-2 rounded-full border border-[var(--line2)] text-xs font-semibold flex items-center gap-2"
+              className="px-4 py-2 rounded-full border border-[var(--line2)] bg-[var(--card)] text-[var(--ink)] hover:bg-[var(--soft)] transition-colors text-xs font-semibold flex items-center gap-2 cursor-pointer"
             >
               {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-[var(--sun)]" /> : <Moon className="w-3.5 h-3.5" />}
               {theme === 'dark' ? 'Light mode' : 'Dark mode'}
