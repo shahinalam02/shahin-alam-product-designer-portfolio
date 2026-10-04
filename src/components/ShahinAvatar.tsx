@@ -6,6 +6,16 @@ interface ShahinAvatarProps {
   alt?: string;
 }
 
+const resolveAssetUrl = (path: string) => {
+  if (path.startsWith('data:') || path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+  const base = import.meta.env.BASE_URL || './';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${cleanBase}${cleanPath}`;
+};
+
 export function ShahinAvatar({
   className = 'w-10 h-10',
   alt = 'Shahin Alam'
@@ -16,10 +26,10 @@ export function ShahinAvatar({
         localStorage.getItem('shahin_portrait_photo') ||
         localStorage.getItem('shahin_profile_photo') ||
         localStorage.getItem('shahin_avatar_photo');
-      if (saved) return saved;
+      if (saved) return resolveAssetUrl(saved);
     }
     const envUrl = (import.meta as unknown as { env?: { VITE_PROFILE_IMAGE_URL?: string } }).env?.VITE_PROFILE_IMAGE_URL;
-    return envUrl || '/shahin-alam.png';
+    return envUrl ? resolveAssetUrl(envUrl) : resolveAssetUrl('shahin-alam.png');
   });
 
   const [hasError, setHasError] = useState(false);
@@ -32,7 +42,7 @@ export function ShahinAvatar({
           e.key === 'shahin_avatar_photo') &&
         e.newValue
       ) {
-        setImgSrc(e.newValue);
+        setImgSrc(resolveAssetUrl(e.newValue));
         setHasError(false);
       }
     };
@@ -40,7 +50,7 @@ export function ShahinAvatar({
     const handleCustom = (e: Event) => {
       const custom = e as CustomEvent<string>;
       if (custom.detail) {
-        setImgSrc(custom.detail);
+        setImgSrc(resolveAssetUrl(custom.detail));
         setHasError(false);
       }
     };
@@ -54,13 +64,14 @@ export function ShahinAvatar({
   }, []);
 
   const handleError = () => {
-    // Try common alternate filenames before declaring error
-    if (imgSrc === '/shahin-alam.png') {
-      setImgSrc('/shahin-portrait.jpg');
-    } else if (imgSrc === '/shahin-portrait.jpg') {
-      setImgSrc('/profile.jpg');
-    } else if (imgSrc === '/profile.jpg') {
-      setImgSrc('/shahin-avatar.png');
+    const candidates = ['shahin-portrait.jpg', 'profile.jpg', 'shahin-avatar.png'];
+    const currentClean = imgSrc.replace(/^.*\//, '');
+    const nextIndex = candidates.indexOf(currentClean) + 1;
+
+    if (nextIndex > 0 && nextIndex < candidates.length) {
+      setImgSrc(resolveAssetUrl(candidates[nextIndex]));
+    } else if (currentClean === 'shahin-alam.png') {
+      setImgSrc(resolveAssetUrl('shahin-portrait.jpg'));
     } else {
       setHasError(true);
     }
@@ -69,7 +80,7 @@ export function ShahinAvatar({
   return (
     <div
       className={`relative rounded-full overflow-hidden shrink-0 border-2 border-[var(--card)] shadow-[0_0_0_1.5px_var(--ink)] bg-[var(--soft)] select-none flex items-center justify-center ${className}`}
-      title="Shahin Alam · Product Designer"
+      aria-label="Avatar of Shahin Alam · Product Designer"
     >
       {!hasError ? (
         <img

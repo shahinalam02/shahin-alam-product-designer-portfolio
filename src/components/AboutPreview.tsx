@@ -67,7 +67,7 @@ export function AboutPreview() {
   }, []);
 
   return (
-    <section ref={containerRef} id="about" className="py-24 sm:py-36 lg:py-44" aria-labelledby="about-preview-heading">
+    <section ref={containerRef} id="about" className="py-24 sm:py-36 lg:py-44 scroll-mt-28" aria-labelledby="about-preview-heading">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col gap-6 mb-16 sm:mb-24 lg:mb-28">
