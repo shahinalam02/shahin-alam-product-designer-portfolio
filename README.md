@@ -153,8 +153,8 @@ The site ships with **placeholder content**. Replace these before publishing:
 
 | What | Where to change it |
 |---|---|
-| **Portrait** | Replace the silhouette `<svg>` inside `.portrait` (Home → About, and the About page) with an `<img>`. |
-| **Case-study copy and visuals** | Edit the `CASES` object in the script, and the `.preview` mock-ups in the home page `#case1`, `#case2` and `#case3`. |
+| **Profile Photo** | Place your headshot at `public/shahin-alam.png` (or `public/shahin-portrait.jpg`). You can also upload it in **Admin Studio** (`#/manage` → Profile Photo) or set an external image URL. |
+| **Case-study copy and visuals** | Edit the `CASES` object in `src/data/portfolioData.ts`, or edit live in **Admin Studio** (`#/manage`). |
 | **Proof counts** | The four `00` values in the Evidence section are placeholders. |
 | **Findings, timelines, tools** | Dashed **Add** tags mark every place that needs real details. |
 | **Email address** | Search for `hello@yourdomain.com`. |

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Camera, Upload, RefreshCw } from 'lucide-react';
 
 interface ShahinPortraitProps {
   className?: string;
@@ -13,11 +14,13 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
         localStorage.getItem('shahin_profile_photo');
       if (saved) return saved;
     }
-    return '/shahin-alam.png';
+    const envUrl = (import.meta as unknown as { env?: { VITE_PROFILE_IMAGE_URL?: string } }).env?.VITE_PROFILE_IMAGE_URL;
+    return envUrl || '/shahin-alam.png';
   });
 
   const [hasError, setHasError] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [uploadNotice, setUploadNotice] = useState<string | null>(null);
 
   useEffect(() => {
     const handleStorage = (e: StorageEvent) => {
@@ -48,13 +51,11 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
 
   const handleImageError = () => {
     if (photoSrc === '/shahin-alam.png') {
-      setPhotoSrc('/shahin-alam.jpg');
-    } else if (photoSrc === '/shahin-alam.jpg') {
-      setPhotoSrc('/Shahin.png');
-    } else if (photoSrc === '/Shahin.png') {
-      setPhotoSrc('Shahin.png');
-    } else if (photoSrc === 'Shahin.png') {
-      setPhotoSrc('/Shahin.jpeg');
+      setPhotoSrc('/shahin-portrait.jpg');
+    } else if (photoSrc === '/shahin-portrait.jpg') {
+      setPhotoSrc('/profile.jpg');
+    } else if (photoSrc === '/profile.jpg') {
+      setPhotoSrc('/shahin-avatar.png');
     } else {
       setHasError(true);
     }
@@ -69,6 +70,8 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
       window.dispatchEvent(
         new CustomEvent('shahin-photo-updated', { detail: dataUrl })
       );
+      setUploadNotice('Photo updated! To make permanent on Vercel, copy it to public/shahin-alam.png');
+      setTimeout(() => setUploadNotice(null), 5000);
     } catch {
       // Ignore localStorage quota errors
     }
@@ -98,17 +101,16 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
 
   return (
     <figure
-      onClick={() => fileInputRef.current?.click()}
       onDragOver={(e) => {
         e.preventDefault();
         setIsDragging(true);
       }}
       onDragLeave={() => setIsDragging(false)}
       onDrop={handleDrop}
-      className={`relative aspect-[4/5] rounded-3xl sm:rounded-[44px] bg-[#F8F9FA] dark:bg-[#1A1B1E] overflow-hidden shadow-2xl border border-[var(--line)] cursor-pointer group transition-all duration-300 ${
+      className={`relative aspect-[4/5] rounded-3xl sm:rounded-[44px] bg-[var(--card)] overflow-hidden shadow-2xl border border-[var(--line)] group transition-all duration-300 ${
         isDragging ? 'ring-4 ring-[var(--lime)] scale-[1.01]' : ''
       } ${className}`}
-      title="Click or drop image to set profile photo"
+      title="Shahin Alam · Product Designer"
       aria-label="Profile photo of Shahin Alam · Product Designer"
     >
       <input
@@ -125,96 +127,61 @@ export function ShahinPortrait({ className = '' }: ShahinPortraitProps) {
 
       {/* Profile Photo Display */}
       {!hasError ? (
-        <img
-          src={photoSrc}
-          alt="Shahin Alam · Product Designer"
-          onError={handleImageError}
-          className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-          referrerPolicy="no-referrer"
-        />
-      ) : (
-        /* Fallback Graphic matching Shahin Alam's new Suit + Glasses Headshot */
-        <div className="w-full h-full flex flex-col items-center justify-between bg-white dark:bg-[#141518] p-6 text-center select-none">
-          <svg
-            viewBox="0 0 400 480"
-            className="w-full h-[82%] object-contain"
-            aria-label="Portrait of Shahin Alam"
+        <div className="w-full h-full relative">
+          <img
+            src={photoSrc}
+            alt="Shahin Alam · Product Designer"
+            onError={handleImageError}
+            className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            referrerPolicy="no-referrer"
+          />
+
+          {/* Interactive Change Photo Overlay on hover */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              fileInputRef.current?.click();
+            }}
+            className="absolute bottom-4 right-4 bg-[var(--ink)]/85 text-[var(--paper)] text-xs font-semibold py-2 px-3.5 rounded-full shadow-lg border border-white/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 cursor-pointer hover:bg-[var(--ink)]"
+            title="Click to choose a new profile photo"
           >
-            <defs>
-              <linearGradient id="suitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#1E232A" />
-                <stop offset="100%" stopColor="#0F1216" />
-              </linearGradient>
-              <linearGradient id="faceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#E5A675" />
-                <stop offset="100%" stopColor="#C98854" />
-              </linearGradient>
-            </defs>
-
-            {/* Suit & White Shirt */}
-            <path
-              d="M 50 480 C 60 380, 110 340, 150 330 L 180 370 C 190 380, 210 380, 220 370 L 250 330 C 290 340, 340 380, 350 480 Z"
-              fill="url(#suitGrad)"
-            />
-            {/* White Shirt Collar */}
-            <polygon points="175,340 200,390 185,340" fill="#FFFFFF" />
-            <polygon points="225,340 200,390 215,340" fill="#FFFFFF" />
-            <polygon points="180,340 200,380 220,340" fill="#F0F2F5" />
-
-            {/* Neck */}
-            <rect x="175" y="270" width="50" height="70" rx="8" fill="#B87747" />
-
-            {/* Head Contour */}
-            <path
-              d="M 140 210 C 135 125, 265 125, 260 210 C 260 260, 245 305, 200 305 C 155 305, 140 260, 140 210 Z"
-              fill="url(#faceGrad)"
-            />
-
-            {/* Thick Dark Wavy Hair */}
-            <path
-              d="M 132 200 C 122 110, 155 60, 200 55 C 245 60, 278 110, 268 200 C 255 150, 230 115, 200 116 C 170 115, 145 150, 132 200 Z"
-              fill="#181412"
-            />
-            <path d="M 180 62 Q 200 40 220 62 Q 235 48 245 70" stroke="#251E1A" strokeWidth="6" strokeLinecap="round" fill="none" />
-
-            {/* Groomed Full Beard & Mustache */}
-            <path
-              d="M 140 225 C 138 280, 160 305, 200 305 C 240 305, 262 280, 260 225 C 255 265, 235 292, 200 294 C 165 292, 145 265, 140 225 Z"
-              fill="#171310"
-            />
-            <path d="M 180 270 Q 200 274 220 270 Q 200 282 180 270 Z" fill="#171310" />
-
-            {/* Eyes */}
-            <circle cx="175" cy="225" r="5" fill="#15110E" />
-            <circle cx="225" cy="225" r="5" fill="#15110E" />
-
-            {/* Spectacles / Glasses (Matching Shahin's modern dark metal frame) */}
-            {/* Left Frame */}
-            <rect x="150" y="210" width="45" height="32" rx="7" fill="none" stroke="#2B303A" strokeWidth="3.5" />
-            {/* Right Frame */}
-            <rect x="205" y="210" width="45" height="32" rx="7" fill="none" stroke="#2B303A" strokeWidth="3.5" />
-            {/* Bridge */}
-            <path d="M 195 220 Q 200 216 205 220" stroke="#2B303A" strokeWidth="3" fill="none" />
-            {/* Temples */}
-            <line x1="150" y1="220" x2="135" y2="216" stroke="#2B303A" strokeWidth="3" />
-            <line x1="250" y1="220" x2="265" y2="216" stroke="#2B303A" strokeWidth="3" />
-          </svg>
-
-          <div className="flex flex-col items-center gap-1.5 pb-2">
-            <span className="text-xs font-bold text-[var(--ink)]">
-              Shahin Alam · Product Designer
-            </span>
-            <span className="text-[11px] text-[var(--mute)] bg-[var(--soft)] py-1 px-3 rounded-full font-semibold">
-              Drop photo or click to choose file
-            </span>
+            <Camera className="w-3.5 h-3.5 text-[var(--lime)]" />
+            <span>Change photo</span>
+          </button>
+        </div>
+      ) : (
+        /* Professional Placeholder with Direct Upload Action - NO cartoon illustration */
+        <div className="w-full h-full flex flex-col items-center justify-center bg-[var(--card)] p-8 text-center select-none border-2 border-dashed border-[var(--line2)] rounded-3xl sm:rounded-[44px]">
+          <div className="w-16 h-16 rounded-full bg-[var(--lime)] text-[var(--lime-ink)] flex items-center justify-center font-display font-bold text-2xl mb-4 shadow-sm">
+            SA
           </div>
+          <h3 className="font-display font-bold text-xl text-[var(--ink)] mb-1">
+            Shahin Alam
+          </h3>
+          <p className="text-xs text-[var(--mute)] max-w-xs mb-6">
+            Upload your professional photo to display here and in your portfolio header.
+          </p>
+
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="inline-flex items-center gap-2 py-2.5 px-5 rounded-full bg-[var(--lime)] text-[var(--lime-ink)] font-bold text-xs shadow-sm hover:opacity-95 transition-all cursor-pointer"
+          >
+            <Upload className="w-4 h-4" />
+            <span>Upload My Photo</span>
+          </button>
+
+          <span className="text-[11px] text-[var(--mute)] mt-3">
+            PNG, JPG or WEBP supported
+          </span>
         </div>
       )}
 
-      {/* Subtle Drag Overlay */}
-      {isDragging && (
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center text-white text-sm font-bold p-4 z-30">
-          Drop photo here to set profile picture
+      {/* Floating Upload Notification */}
+      {uploadNotice && (
+        <div className="absolute top-4 left-4 right-4 bg-[var(--ink)] text-[var(--paper)] text-xs font-semibold py-2 px-3 rounded-2xl shadow-xl border border-[var(--lime)] text-center animate-fade z-20">
+          {uploadNotice}
         </div>
       )}
     </figure>

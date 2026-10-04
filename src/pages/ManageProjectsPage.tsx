@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useProjects, VisualProject } from '../context/ProjectsContext';
 import { CaseStudy } from '../data/portfolioData';
-import { Lock, Unlock, Key, Plus, Trash2, Edit3, Eye, Download, Upload, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Lock, Unlock, Key, Plus, Trash2, Edit3, Eye, Download, Upload, ShieldCheck, ArrowRight, Camera, Image, CheckCircle2, RefreshCw } from 'lucide-react';
 
 export function ManageProjectsPage() {
   const {
@@ -37,7 +37,7 @@ export function ManageProjectsPage() {
   const [passChangeSuccess, setPassChangeSuccess] = useState('');
 
   // Main Studio state
-  const [activeStudioTab, setActiveStudioTab] = useState<'cases' | 'projects'>('cases');
+  const [activeStudioTab, setActiveStudioTab] = useState<'cases' | 'projects' | 'profile'>('cases');
   const [isEditingCase, setIsEditingCase] = useState(false);
   const [editingCaseId, setEditingCaseId] = useState<number | null>(null);
 
@@ -48,6 +48,76 @@ export function ManageProjectsPage() {
   const [showJsonModal, setShowJsonModal] = useState(false);
   const [jsonInput, setJsonInput] = useState('');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Photo management state
+  const photoFileInputRef = useRef<HTMLInputElement>(null);
+  const [photoUrlInput, setPhotoUrlInput] = useState('');
+  const [currentPhotoPreview, setCurrentPhotoPreview] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return (
+        localStorage.getItem('shahin_portrait_photo') ||
+        localStorage.getItem('shahin_profile_photo') ||
+        '/shahin-alam.png'
+      );
+    }
+    return '/shahin-alam.png';
+  });
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target?.result as string;
+        if (result) {
+          setCurrentPhotoPreview(result);
+          try {
+            localStorage.setItem('shahin_portrait_photo', result);
+            localStorage.setItem('shahin_profile_photo', result);
+            window.dispatchEvent(new CustomEvent('shahin-photo-updated', { detail: result }));
+            showToast('Profile photo updated across entire portfolio!');
+          } catch {
+            showToast('Photo updated for this session!');
+          }
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSavePhotoUrl = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!photoUrlInput.trim()) return;
+    const url = photoUrlInput.trim();
+    setCurrentPhotoPreview(url);
+    try {
+      localStorage.setItem('shahin_portrait_photo', url);
+      localStorage.setItem('shahin_profile_photo', url);
+      localStorage.setItem('shahin_custom_photo_url', url);
+      window.dispatchEvent(new CustomEvent('shahin-photo-updated', { detail: url }));
+      showToast('Profile photo URL saved and updated!');
+      setPhotoUrlInput('');
+    } catch {
+      showToast('Photo URL updated!');
+    }
+  };
+
+  const handleDownloadPhoto = () => {
+    const link = document.createElement('a');
+    link.href = currentPhotoPreview;
+    link.download = 'shahin-alam.png';
+    link.click();
+    showToast('Downloaded as shahin-alam.png! Place into your public/ folder.');
+  };
+
+  const handleResetPhoto = () => {
+    localStorage.removeItem('shahin_portrait_photo');
+    localStorage.removeItem('shahin_profile_photo');
+    localStorage.removeItem('shahin_custom_photo_url');
+    setCurrentPhotoPreview('/shahin-alam.png');
+    window.dispatchEvent(new CustomEvent('shahin-photo-updated', { detail: '/shahin-alam.png' }));
+    showToast('Photo reset to default /shahin-alam.png');
+  };
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -481,6 +551,23 @@ export function ManageProjectsPage() {
             <span className={`text-xs px-2 py-0.5 rounded-full ${activeStudioTab === 'projects' ? 'bg-[var(--lime)] text-[var(--lime-ink)]' : 'bg-[var(--line)] text-[var(--mute)]'}`}>
               {visualProjectList.length}
             </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setActiveStudioTab('profile');
+              setIsEditingCase(false);
+              setIsEditingProject(false);
+            }}
+            className={`py-2.5 px-6 rounded-xl font-display font-bold text-sm transition-all cursor-pointer flex items-center gap-2 ${
+              activeStudioTab === 'profile'
+                ? 'bg-[var(--ink)] text-[var(--paper)] shadow-md'
+                : 'text-[var(--ink)] hover:bg-[var(--card)]'
+            }`}
+          >
+            <Camera className="w-4 h-4 text-[var(--lime)]" />
+            <span>Profile & Portrait Photo</span>
           </button>
         </div>
 
@@ -1086,6 +1173,190 @@ export function ManageProjectsPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* -----------------------------------------------------------
+            TAB C: PROFILE & PORTRAIT PHOTO MANAGEMENT
+        ----------------------------------------------------------- */}
+        {activeStudioTab === 'profile' && (
+          <div className="flex flex-col gap-8 animate-fade">
+            {/* Header */}
+            <div className="pb-4 border-b border-[var(--line)]">
+              <h2 className="font-display font-bold text-xl sm:text-2xl text-[var(--ink)]">
+                Profile & Portrait Photo
+              </h2>
+              <p className="text-xs sm:text-sm text-[var(--mute)] mt-1">
+                Manage your real photograph displayed on the About page, homepage portrait card, and circular navigation avatars.
+              </p>
+            </div>
+
+            {/* Main Grid: Previews + Controls */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-8 items-start">
+              {/* Left Column: Live Previews */}
+              <div className="bg-[var(--card)] border border-[var(--line)] rounded-3xl p-6 sm:p-8 flex flex-col gap-6 shadow-sm">
+                <h3 className="font-display font-bold text-lg text-[var(--ink)] flex items-center gap-2">
+                  <Image className="w-5 h-5 text-[var(--lime)]" />
+                  <span>Current Live Previews</span>
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-[1.2fr_1fr] gap-6 items-center">
+                  {/* Portrait Preview */}
+                  <div className="flex flex-col gap-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[var(--mute)]">
+                      About & Home Card (4:5)
+                    </span>
+                    <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-[var(--line)] bg-[var(--soft)] shadow-md">
+                      <img
+                        src={currentPhotoPreview}
+                        alt="Shahin Alam portrait preview"
+                        className="w-full h-full object-cover object-center"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/shahin-alam.png';
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Avatar Preview */}
+                  <div className="flex flex-col gap-4">
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-[var(--mute)] block mb-2">
+                        Nav & Chat Avatar (1:1)
+                      </span>
+                      <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[var(--card)] shadow-[0_0_0_2px_var(--ink)] bg-[var(--soft)]">
+                        <img
+                          src={currentPhotoPreview}
+                          alt="Shahin Alam avatar preview"
+                          className="w-full h-full object-cover object-[center_20%]"
+                          referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/shahin-alam.png';
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-[var(--line)]">
+                      <span className="text-xs font-bold text-[var(--ink)] block mb-1">
+                        Active Source:
+                      </span>
+                      <code className="text-[11px] bg-[var(--soft)] p-1.5 rounded-lg text-[var(--mute)] break-all block">
+                        {currentPhotoPreview.startsWith('data:')
+                          ? 'Uploaded custom image (Data URL stored in browser)'
+                          : currentPhotoPreview}
+                      </code>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleResetPhoto}
+                      className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-xl border border-[var(--line2)] text-xs font-semibold text-[var(--mute)] hover:text-[var(--ink)] w-fit cursor-pointer"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      <span>Reset to default</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Upload, URL & Vercel Instructions */}
+              <div className="flex flex-col gap-6">
+                {/* Method 1: Upload from Computer */}
+                <div className="bg-[var(--card)] border border-[var(--line)] rounded-3xl p-6 sm:p-8 shadow-sm">
+                  <h4 className="font-display font-bold text-base sm:text-lg text-[var(--ink)] mb-2 flex items-center gap-2">
+                    <Camera className="w-4 h-4 text-[var(--lime)]" />
+                    <span>Upload Your Photo</span>
+                  </h4>
+                  <p className="text-xs text-[var(--mute)] mb-4">
+                    Choose a photo from your computer. It instantly updates across the website in real-time.
+                  </p>
+
+                  <input
+                    ref={photoFileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handlePhotoUpload}
+                    className="hidden"
+                  />
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => photoFileInputRef.current?.click()}
+                      className="py-2.5 px-6 rounded-full bg-[var(--lime)] text-[var(--lime-ink)] font-bold text-xs sm:text-sm hover:opacity-90 shadow-sm flex items-center gap-2 cursor-pointer"
+                    >
+                      <Upload className="w-4 h-4" />
+                      <span>Choose Photo from Computer</span>
+                    </button>
+                    <span className="text-xs text-[var(--mute)]">JPG, PNG, or WEBP</span>
+                  </div>
+                </div>
+
+                {/* Method 2: Enter Hosted Image URL */}
+                <div className="bg-[var(--card)] border border-[var(--line)] rounded-3xl p-6 sm:p-8 shadow-sm">
+                  <h4 className="font-display font-bold text-base sm:text-lg text-[var(--ink)] mb-2">
+                    Or Use a Hosted Image URL
+                  </h4>
+                  <p className="text-xs text-[var(--mute)] mb-4">
+                    Paste a link to your photo (e.g. GitHub avatar, Cloudinary, LinkedIn, or personal CDN).
+                  </p>
+
+                  <form onSubmit={handleSavePhotoUrl} className="flex flex-col sm:flex-row gap-2.5">
+                    <input
+                      type="url"
+                      value={photoUrlInput}
+                      onChange={(e) => setPhotoUrlInput(e.target.value)}
+                      placeholder="https://avatars.githubusercontent.com/u/... or https://..."
+                      className="flex-1 py-2.5 px-3.5 rounded-xl border border-[var(--line2)] bg-[var(--soft)] text-xs sm:text-sm text-[var(--ink)] focus:outline-none focus:border-[var(--ink)]"
+                    />
+                    <button
+                      type="submit"
+                      className="py-2.5 px-5 rounded-xl bg-[var(--ink)] text-[var(--paper)] font-bold text-xs hover:opacity-90 cursor-pointer shrink-0"
+                    >
+                      Save URL
+                    </button>
+                  </form>
+                </div>
+
+                {/* Vercel Deployment Guide & Download Button */}
+                <div className="bg-[var(--panel)] text-[var(--on-panel)] border border-[var(--panel-line)] rounded-3xl p-6 sm:p-8 shadow-xl">
+                  <div className="flex items-center gap-2 text-[var(--lime)] font-bold text-sm mb-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>How to Keep Your Photo Permanent on Vercel</span>
+                  </div>
+
+                  <p className="text-xs text-[var(--panel-mute)] leading-relaxed mb-4">
+                    When deploying to Vercel, the web server looks for your image file inside your project's <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/</code> directory at <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/shahin-alam.png</code>.
+                  </p>
+
+                  <ol className="text-xs text-[var(--panel-mute)] flex flex-col gap-2 pl-4 mb-6 list-decimal">
+                    <li>
+                      Click the button below to download your current photo as <strong className="text-[var(--on-panel)]">shahin-alam.png</strong>.
+                    </li>
+                    <li>
+                      Move that downloaded file into the <strong className="text-[var(--on-panel)]">public/</strong> folder in your local project root: <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">public/shahin-alam.png</code>.
+                    </li>
+                    <li>
+                      Commit and push to GitHub: <code className="bg-white/10 px-1.5 py-0.5 rounded text-[var(--on-panel)] font-mono">git add public/shahin-alam.png && git commit -m "Add profile photo" && git push</code>.
+                    </li>
+                    <li>
+                      Vercel will rebuild and your photo will be served permanently on your live domain!
+                    </li>
+                  </ol>
+
+                  <button
+                    type="button"
+                    onClick={handleDownloadPhoto}
+                    className="inline-flex items-center gap-2 py-3 px-6 rounded-full bg-[var(--lime)] text-[var(--lime-ink)] font-bold text-xs sm:text-sm hover:opacity-90 shadow-md cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download as shahin-alam.png</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
