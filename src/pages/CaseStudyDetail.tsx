@@ -125,6 +125,28 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
                 <p className="font-semibold text-sm sm:text-base leading-snug">{currentCase.tools.join(', ')}</p>
               </div>
             </div>
+
+            {/* Hero Interactive Visual Showcase */}
+            <div className="mt-10 sm:mt-14 w-full">
+              <div className="flex items-center justify-between text-xs font-bold mb-3 px-1">
+                <span className="text-[var(--mute)] uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[var(--lime)]" />
+                  Shipped Product Design Showcase
+                </span>
+                <span className="py-1 px-3 rounded-full bg-[var(--soft)] text-[var(--ink)] text-[11px] font-semibold border border-[var(--line)]">
+                  Live Interactive Prototype
+                </span>
+              </div>
+              <div className="w-full">
+                {currentCase.id === 1 || currentCase.category === 'fin' ? (
+                  <FintechDashboardMockup variant="after" />
+                ) : currentCase.id === 2 || currentCase.category === 'web' ? (
+                  <SaaSPlatformMockup variant="after" />
+                ) : (
+                  <MobileCheckoutMockup variant="after" />
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Layout: TOC Sidebar + Deep Dive Content */}
@@ -316,92 +338,79 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
                 </div>
               </section>
 
-              {/* 07 The Solution (Interactive Slider + Mockups) */}
+              {/* 07 The Solution (Interactive Before & After Interface Mockups) */}
               <section id="cs-solution" className="scroll-mt-28">
                 <div className="text-xs font-bold text-[var(--mute)] mb-2 uppercase tracking-wider">07 · The Solution</div>
-                <h2 className="font-display font-bold text-3xl sm:text-5xl tracking-tight mb-4">
-                  Interactive Before & After
-                </h2>
-
-                {/* Slider */}
-                <div className="relative rounded-2xl overflow-hidden aspect-[16/9] sm:aspect-[16/8] select-none border border-[var(--line)] shadow-inner my-6">
-                  {/* Before */}
-                  <div className="absolute inset-0 bg-[var(--soft)] p-6 sm:p-10 flex flex-col justify-center items-center">
-                    <span className="absolute top-3 left-3 py-1 px-3 rounded-full bg-[var(--ink)] text-[var(--paper)] text-xs font-bold">
-                      Before
-                    </span>
-                    <div className="w-[85%] max-w-md flex flex-col gap-2 opacity-75">
-                      <div className="h-2.5 bg-[var(--ink)]/30 rounded w-full"></div>
-                      <div className="h-2.5 bg-[var(--ink)]/25 rounded w-3/4"></div>
-                      <div className="h-2.5 bg-[var(--ink)]/30 rounded w-full"></div>
-                      <div className="flex gap-2 mt-2">
-                        <span className="py-1 px-3 rounded bg-[var(--card)] text-[10px] font-bold">Back</span>
-                        <span className="py-1 px-3 rounded bg-[var(--card)] text-[10px]">Skip</span>
-                        <span className="py-1 px-3 rounded bg-[var(--card)] text-[10px]">Continue</span>
-                      </div>
-                    </div>
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+                  <div>
+                    <h2 className="font-display font-bold text-3xl sm:text-5xl tracking-tight mb-2">
+                      Before & After Transformation
+                    </h2>
+                    <p className="text-sm text-[var(--mute)]">
+                      Compare the legacy friction-heavy interface against the redesigned streamlined experience.
+                    </p>
                   </div>
+                </div>
 
-                  {/* After */}
-                  <div
-                    className="absolute inset-0 bg-[var(--lime)] text-[var(--lime-ink)] p-6 sm:p-10 flex flex-col justify-center items-center pointer-events-none"
-                    style={{ clipPath: `inset(0 0 0 ${sliderPos}%)` }}
-                  >
-                    <span className="absolute top-3 right-3 py-1 px-3 rounded-full bg-[var(--lime-ink)] text-[var(--lime)] text-xs font-bold">
-                      After
-                    </span>
-                    <div className="w-[85%] max-w-md flex flex-col gap-3">
-                      <b className="font-display font-bold text-2xl sm:text-3xl tracking-tight leading-tight">
-                        {currentCase.solutionHeadline}
-                      </b>
-                      <div className="h-2.5 bg-[var(--lime-ink)]/25 rounded w-4/5"></div>
-                      <span className="py-2.5 px-6 rounded-full bg-[var(--lime-ink)] text-[var(--lime)] font-bold text-xs self-start mt-2 shadow-md">
-                        {currentCase.solutionCta} →
+                {/* Side-by-Side Comparison Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 my-6">
+                  {/* Before State */}
+                  <div className="flex flex-col gap-2.5">
+                    <div className="flex items-center justify-between px-1">
+                      <span className="text-xs font-bold text-red-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                        Before (High Friction / Drop-off)
                       </span>
+                      <span className="text-[11px] text-[var(--mute)]">Legacy System</span>
                     </div>
+                    {currentCase.id === 1 || currentCase.category === 'fin' ? (
+                      <FintechDashboardMockup variant="before" />
+                    ) : currentCase.id === 2 || currentCase.category === 'web' ? (
+                      <SaaSPlatformMockup variant="before" />
+                    ) : (
+                      <MobileCheckoutMockup variant="before" />
+                    )}
                   </div>
 
-                  {/* Handle */}
-                  <div
-                    className="absolute top-0 bottom-0 w-1 bg-[var(--ink)] pointer-events-none z-10"
-                    style={{ left: `${sliderPos}%` }}
-                  >
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[var(--ink)] text-[var(--paper)] flex items-center justify-center font-bold text-xs shadow-lg">
-                      ⇄
+                  {/* After State */}
+                  <div className="flex flex-col gap-2.5">
+                    <div className="flex items-center justify-between px-1">
+                      <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        After (Streamlined / High Converting)
+                      </span>
+                      <span className="text-[11px] text-[var(--lime)] font-bold">Shipped Solution</span>
                     </div>
+                    {currentCase.id === 1 || currentCase.category === 'fin' ? (
+                      <FintechDashboardMockup variant="after" />
+                    ) : currentCase.id === 2 || currentCase.category === 'web' ? (
+                      <SaaSPlatformMockup variant="after" />
+                    ) : (
+                      <MobileCheckoutMockup variant="after" />
+                    )}
                   </div>
-
-                  <input
-                    type="range"
-                    min="5"
-                    max="95"
-                    value={sliderPos}
-                    onChange={(e) => setSliderPos(Number(e.target.value))}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
-                    aria-label="Compare before and after"
-                  />
                 </div>
 
                 {/* Journey comparison */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                  <div className="p-5 rounded-2xl bg-[var(--soft)] flex flex-col gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                  <div className="p-5 rounded-2xl bg-[var(--soft)] flex flex-col gap-2 border border-[var(--line)]">
                     <span className="text-xs font-bold text-[var(--mute)]">Original Journey ({currentCase.beforeJourney.length} steps)</span>
                     <div className="flex flex-wrap items-center gap-1.5 text-xs">
                       {currentCase.beforeJourney.map((step, i) => (
                         <span key={step} className="flex items-center gap-1.5">
-                          <span className="py-1 px-2.5 rounded bg-[var(--card)] font-medium">{step}</span>
+                          <span className="py-1 px-2.5 rounded bg-[var(--card)] font-medium shadow-xs">{step}</span>
                           {i < currentCase.beforeJourney.length - 1 && <span className="text-[var(--mute)]">→</span>}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="p-5 rounded-2xl bg-[var(--lime)] text-[var(--lime-ink)] flex flex-col gap-2">
+                  <div className="p-5 rounded-2xl bg-[var(--lime)] text-[var(--lime-ink)] flex flex-col gap-2 shadow-sm">
                     <span className="text-xs font-bold">Streamlined Journey ({currentCase.afterJourney.length} steps)</span>
                     <div className="flex flex-wrap items-center gap-1.5 text-xs">
                       {currentCase.afterJourney.map((step, i) => (
                         <span key={step} className="flex items-center gap-1.5">
-                          <span className="py-1 px-2.5 rounded bg-[#101114] text-[var(--lime)] font-bold">{step}</span>
+                          <span className="py-1 px-2.5 rounded bg-[#101114] text-[var(--lime)] font-bold shadow-xs">{step}</span>
                           {i < currentCase.afterJourney.length - 1 && <span>→</span>}
                         </span>
                       ))}
@@ -416,6 +425,66 @@ export function CaseStudyDetail({ caseId }: CaseStudyDetailProps) {
                 <h2 className="font-display font-bold text-3xl sm:text-5xl tracking-tight mb-4">
                   How do we know it was better?
                 </h2>
+                
+                {/* Visual Outcome Metrics Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                  {currentCase.id === 1 ? (
+                    <>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">First-day Support</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-emerald-600 dark:text-emerald-400 my-1">-48%</div>
+                        <span className="text-xs text-[var(--mute)]">Drop in confusion inquiries</span>
+                      </div>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">Time to 1st Value</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-[var(--ink)] my-1">3.2m</div>
+                        <span className="text-xs text-[var(--mute)]">From 14m setup previously</span>
+                      </div>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">Vault Sweep Adoption</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-[var(--ink)] my-1">94%</div>
+                        <span className="text-xs text-[var(--mute)]">Active automated yield setup</span>
+                      </div>
+                    </>
+                  ) : currentCase.id === 2 ? (
+                    <>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">Conversion Lift</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-emerald-600 dark:text-emerald-400 my-1">+62%</div>
+                        <span className="text-xs text-[var(--mute)]">Trial & pilot completions</span>
+                      </div>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">Pricing Drop-off</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-[var(--ink)] my-1">-45%</div>
+                        <span className="text-xs text-[var(--mute)]">Transparent ROI proof</span>
+                      </div>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">Engagement Time</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-[var(--ink)] my-1">2.1x</div>
+                        <span className="text-xs text-[var(--mute)]">Interactive calculator usage</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">Cart Abandonment</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-emerald-600 dark:text-emerald-400 my-1">-52%</div>
+                        <span className="text-xs text-[var(--mute)]">Cut halfway checkout bounce</span>
+                      </div>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">Checkout Velocity</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-[var(--ink)] my-1">1.2s</div>
+                        <span className="text-xs text-[var(--mute)]">Biometric 1-tap completion</span>
+                      </div>
+                      <div className="bg-[var(--card)] border border-[var(--line)] p-6 rounded-3xl shadow-sm">
+                        <span className="text-xs font-bold text-[var(--mute)] block mb-1">Repeat Purchases</span>
+                        <div className="font-display font-extrabold text-4xl sm:text-5xl text-[var(--ink)] my-1">89%</div>
+                        <span className="text-xs text-[var(--mute)]">Mobile user return rate</span>
+                      </div>
+                    </>
+                  )}
+                </div>
+
                 <div className="p-6 sm:p-8 rounded-3xl bg-[var(--card)] border border-[var(--line)] shadow-sm">
                   <p className="text-base sm:text-lg leading-relaxed text-[var(--ink)] font-medium">
                     {currentCase.outcome}

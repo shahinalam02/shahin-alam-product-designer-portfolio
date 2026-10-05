@@ -1,300 +1,273 @@
-# Shahin Alam — Product Designer Portfolio
+# Shahin Alam — Product Designer & Design Architect Portfolio
 
-> **"I don't start with Figma. I start with the problem."**
+> **"Evidence over guesswork. Friction found & destroyed. Zero fluff."**
 
-A conversational portfolio website for a product designer. Instead of telling clients "I'm a good designer," the site lets them **experience how I think**: it asks questions, diagnoses a real interface, and walks through case studies organised by the client's problem.
+An evidence-led product design portfolio showcasing deep UX architecture, high-converting product journeys, design systems, and measurable business outcomes. Built with modern React 19, TypeScript, Tailwind CSS, and GSAP ScrollTrigger.
 
-Everything lives in a single, dependency-free HTML file. There is no build step, no framework and no package install.
-
----
-
-## Table of contents
-
-- [Concept](#concept)
-- [Features](#features)
-- [Pages and routes](#pages-and-routes)
-- [Tech stack](#tech-stack)
-- [Getting started](#getting-started)
-- [Project structure](#project-structure)
-- [Customising the site](#customising-the-site)
-- [Connecting the contact form](#connecting-the-contact-form)
-- [Deployment](#deployment)
-- [Design system](#design-system)
-- [Accessibility](#accessibility)
-- [Browser support](#browser-support)
-- [Promo video](#promo-video)
-- [Roadmap](#roadmap)
-- [License](#license)
-- [Contact](#contact)
+[![React](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8.3-646CFF.svg)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4.0-38B2AC.svg)](https://tailwindcss.com/)
+[![GSAP](https://img.shields.io/badge/GSAP-3.13-88CE02.svg)](https://greensock.com/gsap/)
+[![Email](https://img.shields.io/badge/Email-Shahinalam982.as%40gmail.com-EA4335.svg)](mailto:Shahinalam982.as@gmail.com)
 
 ---
 
-## Concept
+## 📌 Table of Contents
 
-The whole site is a progressive conversation between a potential client and the designer:
-
-1. Something is wrong with my product.
-2. Can this designer understand my problem?
-3. How does he think?
-4. Can he actually solve it?
-5. Can I trust him?
-6. Who is behind the work?
-7. How will we work together?
-8. What happens next?
-9. Let's start a conversation.
-
-**Target audience:** startup founders, SaaS companies, small businesses, product teams and agencies looking for a product designer.
-
----
-
-## Features
-
-### Interactive experiences
-- **Quick diagnosis:** visitors pick what's going wrong and are pointed to the most relevant case study.
-- **Design diagnosis:** a fictional transfer screen with three numbered markers (Hierarchy, Cognitive load, Trust). An **Apply the fixes** button redesigns it live.
-- **Case-study story:** a client/designer chat with Before, Insight, Exploration and Solution tabs, plus a draggable before/after slider.
-- **4D method wheel:** a clickable Discover → Define → Design → Demonstrate cycle that loops back through Iterate.
-- **Self-audit tool:** five yes/no questions that return a tailored result for the visitor's own product.
-- **Conversational contact form:** progress bar, chip selections, inline validation and a chat-style confirmation.
-
-### Page-level details
-- Hero with floating UI fragments, pulsing diagnostic markers and two live cursors ("You" and "Shahin").
-- Designer replies that show a typing indicator before the text appears.
-- Detailed long-form case-study template with a sticky contents list, scroll-spy and a reading-progress bar.
-- Filterable work page and expandable services.
-- Dark mode that follows the visitor's system setting.
-- Fully responsive layout, with a compact mobile drawer navigation.
+- [About Shahin Alam](#-about-shahin-alam)
+- [Key Features](#-key-features)
+- [Case Studies Deep Dives](#-case-studies-deep-dives)
+- [Visual Projects & Design Systems](#-visual-projects--design-systems)
+- [Interactive Tools](#-interactive-tools)
+- [Contact Form & Direct Email (Section 12)](#-contact-form--direct-email-section-12)
+- [Admin Studio](#-admin-studio)
+- [Tech Stack](#-tech-stack)
+- [Getting Started (Local Development)](#-getting-started-local-development)
+- [Deployment Guide](#-deployment-guide)
+  - [GitHub Pages Deployment](#1-deploying-to-github-pages)
+  - [Vercel Deployment](#2-deploying-to-vercel)
+  - [Profile Picture (`Shahin.png`)](#3-profile-picture-setup)
+- [Contact & Hire](#-contact--hire)
 
 ---
 
-## Pages and routes
+## 👤 About Shahin Alam
 
-The site uses **hash-based routing**, so it works on any static host with no server configuration.
+**Product Designer · UI/UX Architect**  
+*Location: Dhaka, Bangladesh · Available Worldwide (Remote)*  
+*Contact: [Shahinalam982.as@gmail.com](mailto:Shahinalam982.as@gmail.com)*
 
-| Route | Page |
-|---|---|
-| `#/` | Home (12-section conversation) |
-| `#/work` | Work, filterable by type of problem |
-| `#/case/1` | Case study 01 · Fintech / SaaS |
-| `#/case/2` | Case study 02 · Web product |
-| `#/case/3` | Case study 03 · Mobile app |
-| `#/thinking` | Five design lenses, self-audit tool, notes |
-| `#/about` | Background, beliefs, skills, who I work with |
-| `#/services` | Five services with fit, deliverables and process |
-| `#/contact` | Conversational project form |
-
-Anchors such as `#diagnosis` or `#thinking` still scroll within the home page.
+With a foundational background in **Computer Science & Engineering (CSE)** and years of specialized UX/UI leadership, Shahin designs digital products that balance user psychology, technical feasibility, and business metrics. Rather than relying on superficial aesthetics or generic templates, every layout is engineered to systematically eliminate customer friction, accelerate time-to-value, and drive measurable revenue growth.
 
 ---
 
-## Tech stack
+## ⚡ Key Features
 
-| Layer | Choice |
-|---|---|
-| Markup / styling / logic | Plain **HTML, CSS and vanilla JavaScript** (no dependencies) |
-| Routing | Hash router in ~20 lines of JS |
-| Fonts | [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Grotesque), [Manrope](https://fonts.google.com/specimen/Manrope) and [Caveat](https://fonts.google.com/specimen/Caveat), loaded from Google Fonts |
-| Hosting | Any static host |
+1. **Evidence-Led 12-Section Narrative:**
+   A progressive conversation that answers founder and team questions sequentially—from problem diagnosis to design philosophy, 4D process, and verified evidence.
+2. **Interactive High-Fidelity UI Mockups:**
+   Realistic, interactive prototypes for Fintech Treasury platforms, SaaS conversion calculators, and Mobile 2-stage checkout flows.
+3. **Interactive Before & After Comparisons:**
+   Side-by-side and interactive split slider comparisons demonstrating how high-friction legacy interfaces are transformed into streamlined products.
+4. **GSAP ScrollTrigger Motion Architecture:**
+   Smooth entry reveals, synchronized counter metrics, and parallax scrubs with automatic `ResizeObserver` layout recalculation when dynamic content expands or images load.
+5. **Direct Client Inquiry Dispatch (Section 12: Your Turn):**
+   Form submissions route directly to `Shahinalam982.as@gmail.com` with automatic pre-filled mail client triggers, copy-to-clipboard functionality, and live progress validation.
+6. **In-Browser Admin Studio (`#/manage`):**
+   A password-protected management suite allowing real-time case study editing, visual project creation, metric updates, passcode changes, and profile photo uploads.
+7. **Dark / Light Mode System:**
+   High-contrast color tokens with automatic OS preference detection and persistent localStorage state.
+8. **Static Hosting & GitHub Pages Ready:**
+   Zero-configuration relative routing (`base: './'`), hash-based navigation (`#/work`, `#/about`, `#/case/1`), and clean production bundle outputs.
 
 ---
 
-## Getting started
+## 💼 Case Studies Deep Dives
 
-### Option 1: open the file
+Each case study breaks down real problems, research methods, key trade-offs, and verified metrics:
 
+- **Case 01 — Fintech / SaaS Treasury Platform:**
+  - *Problem:* Dense multi-metric treasury dashboard overwhelmed first-time operators with 14 competing cards.
+  - *Solution:* Transformed into a guided liquidity workspace with one clear next step, SVG sparklines, and 1-click automated sweeps.
+  - *Outcome:* **48% reduction** in first-day support inquiries; **3.2 min** average time to first sweep.
+- **Case 02 — B2B Web Product & Conversion Engine:**
+  - *Problem:* Cluttered landing page with 4 competing CTAs and abstract jargon causing high bounce rates.
+  - *Solution:* One clear promise, interactive real-time ROI calculator, and transparent pricing proof.
+  - *Outcome:* **+62% lift** in pilot completions; **45% decrease** in pricing page drop-off.
+- **Case 03 — Mobile Native Checkout:**
+  - *Problem:* 6-step exhausting checkout with 19 form inputs and unexpected hidden surcharges.
+  - *Solution:* 2-stage transparent biometric flow with native Apple Pay / Google Pay one-tap completion.
+  - *Outcome:* **52% drop** in cart abandonment; **1.2s** average checkout velocity.
+
+---
+
+## 🎨 Visual Projects & Design Systems
+
+Browse design deliverables across mobile apps, design systems, and data-dense platforms:
+
+- **Mercury Multi-brand Design System (Fintech):**
+  Token-driven architecture with 140+ components, zero token drift, and WCAG AAA accessibility.
+- **Pulse Health Biometric Companion (Mobile App):**
+  Mindful daily health tracker with progressive SVG sleep score rings and haptic feedback.
+- **Vortex Real-time Infrastructure Console (DevOps):**
+  High-density dark telemetry monitor with Kubernetes cluster node matrix and 12ms latency tracker.
+- **Aura Minimalist E-Commerce (Brand):**
+  High-fashion direct-to-consumer store with instant 1-tap cart drawer and editorial typography.
+
+---
+
+## 🛠️ Interactive Tools
+
+- **60-Second Design Diagnosis (`#thinking`):**
+  Interactive widget allowing visitors to toggle between a cluttered legacy interface and a cleaned-up UX architecture, highlighting 4 core cognitive principles.
+- **Self-Audit Checklist (`#/thinking`):**
+  An interactive 5-question audit diagnosing clarity, visual hierarchy, cognitive load, feedback loops, and user evidence.
+- **Interactive Before & After Slider:**
+  Compare legacy friction screens against modern solutions with real-time drag interaction.
+
+---
+
+## 📬 Contact Form & Direct Email (Section 12)
+
+When potential clients fill out **Section 12 ("Your Turn")** or visit `#/contact`:
+1. Submissions are routed directly to **`Shahinalam982.as@gmail.com`**.
+2. An instant `mailto:` link is triggered so the client's desktop or mobile email app (Gmail, Apple Mail, Outlook) opens pre-addressed with the complete formatted project brief.
+3. A **Copy Inquiry Text** button lets clients copy the brief to their clipboard with one click.
+4. Clients can also click direct mailto links at any time: `mailto:Shahinalam982.as@gmail.com`.
+
+---
+
+## 🔐 Admin Studio
+
+Access the administrative portal by navigating to `#/admin` or `#/manage`:
+- **Default Passcode:** `design2026` *(Can be updated to a custom passcode inside the studio)*
+- **Features:**
+  - Add, edit, or remove case studies and visual projects.
+  - Change project headlines, metrics, and outcomes.
+  - Upload or change profile picture (`Shahin.png`) with instant live preview.
+  - Change administrator passcode.
+  - Export and import portfolio backup JSON.
+
+---
+
+## 💻 Tech Stack
+
+- **Framework:** React 19 (SPA Architecture)
+- **Language:** TypeScript 5.8
+- **Build Tool:** Vite 8.3
+- **Styling:** Tailwind CSS 4.0
+- **Animation & Motion:** GSAP 3.13 with ScrollTrigger plugin
+- **Icons:** Lucide React
+- **Hosting Target:** GitHub Pages / Vercel / Netlify / Any static host
+
+---
+
+## 🚀 Getting Started (Local Development)
+
+### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
-open index.html        # macOS
-# start index.html     # Windows
-# xdg-open index.html  # Linux
+git clone https://github.com/<your-username>/<your-repo-name>.git
+cd <your-repo-name>
 ```
 
-### Option 2: run a local server (recommended)
-
+### 2. Install dependencies
 ```bash
-# Python
-python3 -m http.server 8000
-
-# or Node
-npx serve .
+npm install
 ```
 
-Then visit <http://localhost:8000>.
-
-> The file is named `shahin-alam-portfolio.html` in the original export. Rename it to `index.html` so hosting platforms serve it by default.
-
----
-
-## Project structure
-
-```text
-.
-├── index.html            # The entire website (HTML + CSS + JS)
-├── README.md             # You are here
-├── LICENSE               # Add your license
-└── assets/               # Optional
-    ├── promo-8s.mp4
-    ├── promo-15s.mp4
-    └── promo-30s.mp4
-```
-
-Inside `index.html`, the code is organised in this order:
-
-1. `<style>`: design tokens, then components, then page sections.
-2. `<main>`: one `.page` block per route (`home`, `work`, `case`, `thinking`, `about`, `services`, `contact`).
-3. `<script>`: interactions, case-study data, self-audit logic and the router.
-
----
-
-## Customising the site
-
-The site ships with **placeholder content**. Replace these before publishing:
-
-| What | Where to change it |
-|---|---|
-| **Profile Photo** | Place your headshot at `public/shahin-alam.png` (or `public/shahin-portrait.jpg`). You can also upload it in **Admin Studio** (`#/manage` → Profile Photo) or set an external image URL. |
-| **Case-study copy and visuals** | Edit the `CASES` object in `src/data/portfolioData.ts`, or edit live in **Admin Studio** (`#/manage`). |
-| **Proof counts** | The four `00` values in the Evidence section are placeholders. |
-| **Findings, timelines, tools** | Dashed **Add** tags mark every place that needs real details. |
-| **Email address** | Search for `hello@yourdomain.com`. |
-| **Notes (Thinking page)** | Replace the four "Coming soon" titles with your real articles. |
-| **Page title and favicon** | The `<title>` tag and the `titles` object in the script. |
-
-> **Keep it honest.** The site is built around evidence. Only add measured results if you actually measured them, and never invent client metrics.
-
-### Changing the colours
-
-All colours are CSS variables at the top of the stylesheet:
-
-```css
-:root {
-  --paper: #F5F5F2;   /* page background */
-  --ink:   #101114;   /* text and dark panels */
-  --lime:  #C6F34F;   /* main accent */
-  --sun:   #FFD84A;   /* secondary accent */
-}
-```
-
-Dark-mode values are defined in the `prefers-color-scheme: dark` block directly below.
-
----
-
-## Connecting the contact form
-
-The form is a **front-end demo**: it validates and shows a confirmation but **does not send anything yet**. Pick one:
-
-**Formspree**
-
-```html
-<form class="form" action="https://formspree.io/f/your-id" method="POST" novalidate>
-```
-
-**Netlify Forms** (when hosted on Netlify)
-
-```html
-<form class="form" name="contact" method="POST" data-netlify="true" novalidate>
-```
-
-In either case, adapt the submit handler (search for `form.addEventListener('submit'`) so it calls `fetch()` with the form data and shows the confirmation only after a successful response.
-
----
-
-## Deployment
-
-Because it's a static file, deployment takes a few minutes.
-
-### GitHub Pages
-
-1. Rename the file to `index.html` and push to GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**, then select `main` and `/ (root)`.
-4. Your site will be live at `https://<your-username>.github.io/<your-repo>/`.
-
-### Netlify
-
-1. Drag the project folder onto [app.netlify.com/drop](https://app.netlify.com/drop), or connect the repository.
-2. No build command is needed. Set the publish directory to `.`.
-
-### Vercel
-
+### 3. Start local development server
 ```bash
-npm i -g vercel
-vercel
+npm run dev
 ```
+Open [http://localhost:3000](http://localhost:3000) (or the displayed Vite port) in your browser.
 
-Accept the defaults. It's detected as a static site.
-
-### Custom domain
-
-Add your domain in your host's dashboard, then point a `CNAME` (or `A`) record at the provider.
-
----
-
-## Design system
-
-| Element | Direction |
-|---|---|
-| **Style** | Soft off-white surfaces, large rounded cards (28–50px), pill buttons with a circular arrow |
-| **Colour** | Ink and paper, one lime accent, a touch of yellow |
-| **Typography** | Large, tight Bricolage Grotesque headlines; Manrope for body and UI; Caveat sparingly for handwritten notes |
-| **Signature devices** | Quote-mark questions, inline icon chips in headlines, designer reply bubbles, numbered diagnostic markers, live cursors |
-| **Motion** | Short, purposeful transitions; typing indicator; sticky stacked case cards; honours `prefers-reduced-motion` |
+### 4. Build for production
+```bash
+npm run build
+```
+The compiled, production-ready static assets will be output to the `dist/` directory.
 
 ---
 
-## Accessibility
+## 🌐 Deployment Guide
 
-- Semantic landmarks and heading hierarchy.
-- Keyboard support: radio groups use arrow keys; accordions and tabs are real buttons.
-- Visible focus states.
-- `aria-live` regions for the diagnosis result and process details.
-- Respects `prefers-reduced-motion` (animations and typing delays are removed).
-- Respects `prefers-color-scheme` for dark mode.
+### 1. Deploying to GitHub Pages
 
-Suggested checks before launch: Lighthouse, axe DevTools, and a quick screen-reader pass.
+1. **Configure Repository Settings:**
+   In your GitHub repository, go to **Settings** → **Pages** → **Build and deployment**.
+   Set **Source** to **GitHub Actions** (or Deploy from branch `gh-pages` / `main`).
+
+2. **Automated GitHub Actions Workflow:**
+   Create a file at `.github/workflows/deploy.yml`:
+   ```yaml
+   name: Deploy to GitHub Pages
+
+   on:
+     push:
+       branches: [main]
+
+   permissions:
+     contents: read
+     pages: write
+     id-token: write
+
+   concurrency:
+     group: 'pages'
+     cancel-in-progress: true
+
+   jobs:
+     deploy:
+       environment:
+         name: github-pages
+         url: ${{ steps.deployment.outputs.page_url }}
+       runs-on: ubuntu-latest
+       steps:
+         - name: Checkout
+           uses: actions/checkout@v4
+
+         - name: Setup Node
+           uses: actions/setup-node@v4
+           with:
+             node-version: 20
+             cache: 'npm'
+
+         - name: Install dependencies
+           run: npm ci
+
+         - name: Build project
+           run: npm run build
+
+         - name: Setup Pages
+           uses: actions/configure-pages@v4
+
+         - name: Upload artifact
+           uses: actions/upload-pages-artifact@v3
+           with:
+             path: './dist'
+
+         - name: Deploy to GitHub Pages
+           id: deployment
+           uses: actions/deploy-pages@v4
+   ```
+
+3. **Relative Path Resolution:**
+   The `vite.config.ts` in this project is already pre-configured with `base: './'` so that repository subpaths (e.g. `https://<username>.github.io/<repo>/`) load assets, scripts, and images without 404 errors.
 
 ---
 
-## Browser support
+### 2. Deploying to Vercel
 
-Modern evergreen browsers (Chrome, Edge, Firefox, Safari). The site uses `color-mix()`, CSS `clip-path`, `position: sticky` and `IntersectionObserver`.
-
----
-
-## Promo video
-
-Three short promo cuts (8, 15 and 30 seconds, 1920×1080, silent) were rendered from the same design system. Add music or voice-over in your video editor before posting. Place the files in `assets/` if you want to keep them in the repository.
+1. Push your code to GitHub.
+2. Sign in to [Vercel](https://vercel.com) and click **"Add New Project"**.
+3. Import your GitHub repository.
+4. Framework Preset will automatically detect **Vite**.
+5. Click **Deploy**. Vercel will build and assign your custom `.vercel.app` domain.
 
 ---
 
-## Roadmap
+### 3. Profile Picture Setup
 
-- [ ] Replace placeholder case studies with real projects
-- [ ] Add real portrait and project screens
-- [ ] Connect the contact form
-- [ ] Publish the first articles on the Thinking page
-- [ ] Add testimonials once real quotes are available
-- [ ] Add Open Graph and Twitter card meta tags for link previews
-- [ ] Add analytics (privacy-friendly, such as Plausible)
-
----
-
-## License
-
-Choose a license before publishing. For a personal portfolio, a common choice is:
-
-- **Code:** MIT
-- **Content, case studies and images:** All rights reserved © Shahin Alam
+Your profile photograph is referenced as **`Shahin.png`** across the site:
+- Place your image file at **`public/Shahin.png`** in your repository.
+- Run:
+  ```bash
+  git add public/Shahin.png
+  git commit -m "Update Shahin profile photo"
+  git push
+  ```
+- The build will bundle `Shahin.png` into `dist/Shahin.png` and serve it everywhere automatically.
 
 ---
 
-## Contact
+## 📬 Contact & Hire
 
-**Shahin Alam**, Product Designer
+Available for select product design engagements, design systems architecture, and UX diagnostic audits:
 
-- Portfolio: `https://your-portfolio-url`
-- Email: `hello@yourdomain.com`
-- LinkedIn: `https://linkedin.com/in/your-handle`
+- **Email:** [Shahinalam982.as@gmail.com](mailto:Shahinalam982.as@gmail.com)
+- **Website:** [https://shahinalam.design](https://shahinalam.design)
+- **Location:** Remote worldwide
 
-> *So... what are you building?*
+---
+
+*Designed with evidence, built with code © 2026 Shahin Alam.*

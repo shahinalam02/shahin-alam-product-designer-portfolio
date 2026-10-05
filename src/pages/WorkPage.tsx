@@ -2,6 +2,12 @@ import { useState } from 'react';
 import { useProjects } from '../context/ProjectsContext';
 import { ShieldCheck, Plus, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { ShahinAvatar } from '../components/ShahinAvatar';
+import {
+  FintechDashboardMockup,
+  SaaSPlatformMockup,
+  MobileCheckoutMockup,
+  VisualProjectShowcase,
+} from '../components/CaseStudyVisuals';
 
 export function WorkPage() {
   const { caseList, visualProjectList, isAdmin } = useProjects();
@@ -174,12 +180,23 @@ export function WorkPage() {
                       "{c.headlineQuote}"
                     </h2>
 
-                    <dl className="grid grid-cols-[70px_1fr] gap-x-3 gap-y-3 text-xs sm:text-sm mb-8 opacity-90">
+                    <dl className="grid grid-cols-[70px_1fr] gap-x-3 gap-y-3 text-xs sm:text-sm mb-6 opacity-90">
                       <dt className="opacity-60 font-semibold">Problem</dt>
                       <dd className="m-0 font-medium line-clamp-3">{c.problem}</dd>
                       <dt className="opacity-60 font-semibold">Outcome</dt>
                       <dd className="m-0 font-medium line-clamp-3">{c.outcome}</dd>
                     </dl>
+
+                    {/* Visual UI Interface Preview Mockup */}
+                    <div className="my-5 rounded-2xl overflow-hidden pointer-events-none transform transition-transform group-hover:scale-[1.01] shadow-lg">
+                      {c.id === 1 || c.category === 'fin' ? (
+                        <FintechDashboardMockup variant="after" />
+                      ) : c.id === 2 || c.category === 'web' ? (
+                        <SaaSPlatformMockup variant="after" />
+                      ) : (
+                        <MobileCheckoutMockup variant="after" />
+                      )}
+                    </div>
                   </div>
 
                   <div className="flex items-center justify-between pt-6 border-t border-current/15">
@@ -231,6 +248,11 @@ export function WorkPage() {
                       <span>{p.metrics}</span>
                     </div>
                   )}
+
+                  {/* High-Fidelity UI Interface Showcase */}
+                  <div className="my-5">
+                    <VisualProjectShowcase project={p} />
+                  </div>
 
                   {/* Deliverables List */}
                   <div className="mb-5">
